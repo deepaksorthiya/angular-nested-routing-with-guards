@@ -1,0 +1,56 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Angular Build and Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ "main" ]
+    paths-ignore:
+      - 'README.md'
+      - '.gitignore'
+      - 'docs/**'
+      - 'images/**'
+      - 'k8s/**'
+      - 'docker-compose.yml'
+      - 'docker/**'
+      - '.gitattributes'
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the source code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "npm"
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        # require to fix 404 issue when page reload
+      - name: Copy Of Index file to 404
+        run: cp dist/angular-nested-routing-with-guards/browser/index.html dist/angular-nested-routing-with-guards/browser/404.html
+
+      - name: Deploy to Github Pages
+        run: npx ng deploy
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # clean and install packages
+          CI: true
