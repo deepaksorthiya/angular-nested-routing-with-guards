@@ -1,25 +1,24 @@
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title">Leaves</h5>
-    <ul class="nav">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="apply" routerLinkActive="active">
-          Apply Leave
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="holiday" routerLinkActive="active">
-          Check Holidays
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="balance" routerLinkActive="active">
-          Leave Balance
-        </a>
-      </li>
-    </ul>
-    <p class="card-text">
-      <router-outlet></router-outlet>
-    </p>
-  </div>
+<div class="btn-group container-fluid">
+  <a
+    class="btn btn-secondary"
+    routerLink="apply"
+    routerLinkActive="active"
+    role="button"
+    >Apply Leave</a
+  >
+  <a
+    class="btn btn-secondary"
+    routerLink="holiday"
+    routerLinkActive="active"
+    role="button"
+    >Check Holidays</a
+  >
+  <a
+    class="btn btn-secondary"
+    routerLink="balance"
+    routerLinkActive="active"
+    role="button"
+    >Leave Balance</a
+  >
 </div>
+<router-outlet></router-outlet>

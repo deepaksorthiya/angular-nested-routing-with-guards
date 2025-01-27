@@ -1,25 +1,24 @@
-<div class="card">
-  <div class="card-body">
-    <h6 class="card-title">Check Balance</h6>
-    <ul class="nav">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="casual" routerLinkActive="active"
-          >Casual</a
-        >
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="earned" routerLinkActive="active"
-          >Earned</a
-        >
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="earnedxyz" routerLinkActive="active"
-          >Bad Link</a
-        >
-      </li>
-    </ul>
-    <p class="card-text">
-      <router-outlet></router-outlet>
-    </p>
-  </div>
+<div class="btn-group container">
+  <a
+    class="btn btn-secondary"
+    routerLink="casual"
+    routerLinkActive="active"
+    role="button"
+    >Casual</a
+  >
+  <a
+    class="btn btn-secondary"
+    routerLink="earned"
+    routerLinkActive="active"
+    role="button"
+    >Earned</a
+  >
+  <a
+    class="btn btn-secondary"
+    routerLink="earnedxyz"
+    routerLinkActive="active"
+    role="button"
+    >Bad Link</a
+  >
 </div>
+<router-outlet></router-outlet>
