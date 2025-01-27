@@ -1,39 +1,65 @@
-﻿<ng-progress ngProgressRouter />
-<!-- nav -->
-<nav class="navbar navbar-expand navbar-dark bg-dark px-3" *ngIf="user">
-  <div class="navbar-nav">
-    <a
-      class="nav-item nav-link"
-      routerLink="/"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-      >Home</a
+﻿<nav
+  class="navbar navbar-expand-lg bg-body-tertiary"
+  *ngIf="user"
+  data-bs-theme="dark"
+>
+  <div class="container-fluid">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarTogglerDemo01"
+      aria-controls="navbarTogglerDemo01"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
     >
-    <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active"
-      >Users</a
-    >
-    <button class="btn btn-link nav-item nav-link" (click)="logout()">
-      Logout
+      <span class="navbar-toggler-icon"></span>
     </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+      <a class="navbar-brand" routerLink="/" routerLinkActive="active">
+        <img
+          src="bootstrap-logo.svg"
+          alt="Logo"
+          width="30"
+          height="24"
+          class="d-inline-block align-text-top"
+        />
+        Bootstrap
+      </a>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/users">Users</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/profile">My Profile</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/work">My Work</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/attendance">My Attendance</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/not-found">Not Found</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/leaves">My leaves</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/destroy-check">Destroy Check</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <button class="btn btn-outline-danger" (click)="logout()">
+          Logout
+        </button>
+      </form>
+    </div>
   </div>
 </nav>
-
-<!-- main app container -->
-<div class="app-container" [ngClass]="{ 'bg-light': user }">
-  <alert></alert>
-  <router-outlet></router-outlet>
-</div>
-
-<!-- credits -->
-<div class="text-center mt-4">
-  <p>
-    <a
-      href="https://jasonwatmore.com/post/2022/11/29/angular-14-user-registration-and-login-example-tutorial"
-      target="_top"
-      >Angular 14 - User Registration and Login Example & Tutorial</a
-    >
-  </p>
-  <p>
-    <a href="https://jasonwatmore.com" target="_top">JasonWatmore.com</a>
-  </p>
-</div>
+<ng-progress ngProgressRouter />
+<alert></alert>
+<router-outlet></router-outlet>
