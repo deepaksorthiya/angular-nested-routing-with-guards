@@ -1,19 +1,25 @@
 import {
   HTTP_INTERCEPTORS,
+  HttpClient,
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  inject,
+  provideAppInitializer,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 // used to create fake backend
 
 import { ErrorInterceptor } from './_helpers/error.interceptor';
-import {
-  FakeBackendInterceptor
-} from './_helpers/fake-backend';
+import { FakeBackendInterceptor } from './_helpers/fake-backend';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 
+import { delay, firstValueFrom, tap } from 'rxjs';
+import { AccountService } from './_services/account.service';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -30,6 +36,34 @@ export const appConfig: ApplicationConfig = {
       useClass: FakeBackendInterceptor,
       multi: true,
     },
+    provideAppInitializer(() => {
+      return firstValueFrom(
+        inject(AccountService)
+          .callFakeRestApi()
+          .pipe(delay(2000))
+          .pipe(
+            tap((data) => {
+              console.log(data);
+            })
+          )
+      );
+    }),
+    provideAppInitializer(() => {
+      const http = inject(HttpClient);
+      return firstValueFrom(
+        http
+          .get('https://jsonplaceholder.typicode.com/posts/1/comments')
+          .pipe(delay(2000))
+          .pipe(
+            tap((data) => {
+              console.log(data);
+            })
+          )
+      );
+    }),
+    provideAppInitializer(
+      () => new Promise<void>((resolve) => setTimeout(resolve, 2000))
+    ),
     provideHttpClient(withInterceptorsFromDi()),
   ],
 };

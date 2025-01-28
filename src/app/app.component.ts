@@ -65,6 +65,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit() {
     this.hide();
+    console.log('AppComponent ngAfterViewInit() initialized.');
   }
 
   logout() {

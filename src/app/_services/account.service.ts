@@ -22,6 +22,12 @@ export class AccountService {
     return this.userSubject.value;
   }
 
+  callFakeRestApi() {
+    return this.http.get(
+      'https://jsonplaceholder.typicode.com/posts/1/comments'
+    );
+  }
+
   login(username: string, password: string) {
     return this.http
       .post<User>(`${environment.apiUrl}/users/authenticate`, {
