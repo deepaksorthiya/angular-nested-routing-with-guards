@@ -5,4 +5,8 @@
   firstName?: string;
   lastName?: string;
   token?: string;
+  email?: string;
+  name?: string;
+  phone?: string;
+  website?: string;
 }

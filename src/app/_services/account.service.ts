@@ -28,6 +28,10 @@ export class AccountService {
     );
   }
 
+  getAllUsers() {
+    return this.http.get<User[]>('https://jsonplaceholder.typicode.com/users/');
+  }
+
   login(username: string, password: string) {
     return this.http
       .post<User>(`${environment.apiUrl}/users/authenticate`, {

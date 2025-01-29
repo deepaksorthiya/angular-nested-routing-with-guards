@@ -72,9 +72,31 @@
         </li>
       </ul>
       <form class="d-flex" role="search">
-        <button class="btn btn-outline-danger" (click)="logout()">
-          Logout
-        </button>
+        <div class="dropdown">
+          <a
+            class="btn btn-success dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            data-bs-display="static"
+            aria-expanded="false"
+          >
+            Profile
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-lg-end">
+            <li>
+              <button class="dropdown-item" type="button" routerLink="/">
+                Info
+              </button>
+            </li>
+            <li>
+              <button class="dropdown-item" type="button" (click)="logout()">
+                Logout
+              </button>
+            </li>
+          </ul>
+        </div>
       </form>
     </div>
   </div>

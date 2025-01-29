@@ -1,1 +1,25 @@
-<p>dashboard works!</p>
+<div class="container">
+  <div class="table-responsive">
+    <h1>External API Users</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Website</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users$ | async">
+          <th scope="row">{{ user.id }}</th>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.phone }}</td>
+          <td>{{ user.website }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
