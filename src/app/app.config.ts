@@ -18,7 +18,7 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { FakeBackendInterceptor } from './_helpers/fake-backend';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 
-import { delay, firstValueFrom, tap } from 'rxjs';
+import { catchError, delay, of, tap } from 'rxjs';
 import { AccountService } from './_services/account.service';
 import { routes } from './app.routes';
 
@@ -37,29 +37,39 @@ export const appConfig: ApplicationConfig = {
       multi: true,
     },
     provideAppInitializer(() => {
-      return firstValueFrom(
-        inject(AccountService)
-          .callFakeRestApi()
-          .pipe(delay(2000))
-          .pipe(
-            tap((data) => {
-              console.log(data);
-            })
-          )
-      );
+      return inject(AccountService)
+        .callFakeRestApi()
+        .pipe(delay(2000))
+        .pipe(
+          tap((data) => {
+            console.log(data);
+          })
+        )
+        .pipe(
+          catchError((error) => {
+            // Handle the error here
+            console.error('ERROR :: ', error);
+            return of([]);
+          })
+        );
     }),
     provideAppInitializer(() => {
       const http = inject(HttpClient);
-      return firstValueFrom(
-        http
-          .get('https://jsonplaceholder.typicode.com/posts/1/comments')
-          .pipe(delay(2000))
-          .pipe(
-            tap((data) => {
-              console.log(data);
-            })
-          )
-      );
+      return http
+        .get('https://jsonplaceholder.typicode.com/posts/1/comments')
+        .pipe(delay(2000))
+        .pipe(
+          tap((data) => {
+            console.log(data);
+          })
+        )
+        .pipe(
+          catchError((error) => {
+            // Handle the error here
+            console.error('ERROR :: ', error);
+            return of([]);
+          })
+        );
     }),
     provideAppInitializer(
       () => new Promise<void>((resolve) => setTimeout(resolve, 2000))
