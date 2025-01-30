@@ -1,24 +1,12 @@
-<div class="btn-group container-fluid">
-  <a
-    class="btn btn-secondary"
-    routerLink="apply"
-    routerLinkActive="active"
-    role="button"
-    >Apply Leave</a
-  >
-  <a
-    class="btn btn-secondary"
-    routerLink="holiday"
-    routerLinkActive="active"
-    role="button"
-    >Check Holidays</a
-  >
-  <a
-    class="btn btn-secondary"
-    routerLink="balance"
-    routerLinkActive="active"
-    role="button"
-    >Leave Balance</a
-  >
+<div class="container-fluid my-2">
+  <ul ngbNav [activeId]="route.url | async" class="nav-tabs">
+    @for (link of routingLinks; track link) {
+    <li [ngbNavItem]="link.link">
+      <a ngbNavLink routerLink="{{ link.link }}" routerLinkActive="active">{{
+        link.title
+      }}</a>
+    </li>
+    }
+  </ul>
+  <router-outlet></router-outlet>
 </div>
-<router-outlet></router-outlet>

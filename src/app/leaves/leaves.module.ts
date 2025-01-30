@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { ApplyComponent } from './apply/apply.component';
 import { HolidayComponent } from './holiday/holiday.component';
 import { LeavesRoutingModule } from './leaves-routing.module';
@@ -14,6 +14,6 @@ import { Page404leavesComponent } from './page404leaves/page404leaves.component'
     Page404leavesComponent,
     HolidayComponent,
   ],
-  imports: [CommonModule, LeavesRoutingModule],
+  imports: [CommonModule, LeavesRoutingModule, NgbNavModule],
 })
 export class LeavesModule {}
