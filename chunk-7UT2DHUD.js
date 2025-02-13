@@ -1,1 +1,0 @@
-import{C as u,D as c,J as i,L as a,c as r,u as s}from"./chunk-GS4HORBT.js";function d(t){t||(c(d),t=u(i));let n=new r(e=>t.onDestroy(e.next.bind(e)));return e=>e.pipe(s(n))}function M(t){let n=a(t);return new r(e=>{n?.onDestroy(()=>e.complete());let o=t.subscribe(l=>e.next(l));return()=>o.unsubscribe()})}export{d as a,M as b};
