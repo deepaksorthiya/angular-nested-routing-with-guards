@@ -1,0 +1,1 @@
+import{C as u,D as c,J as i,L as a,c as r,u as s}from"./chunk-5BPOSYVU.js";function l(t){t||(c(l),t=u(i));let n=new r(e=>t.onDestroy(e.next.bind(e)));return e=>e.pipe(s(n))}function q(t){let n=a(t);return new r(e=>{n?.onDestroy(()=>e.complete());let o=t.subscribe(d=>e.next(d));return()=>o.unsubscribe()})}export{l as a,q as b};
