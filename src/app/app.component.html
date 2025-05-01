@@ -7,16 +7,24 @@
     <button
       class="navbar-toggler"
       type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarTogglerDemo01"
-      aria-controls="navbarTogglerDemo01"
-      aria-expanded="false"
+      (click)="isMenuCollapsed = !isMenuCollapsed"
+      aria-controls="navbarContent"
+      [attr.aria-expanded]="!isMenuCollapsed"
       aria-label="Toggle navigation"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <a class="navbar-brand" routerLink="/" routerLinkActive="active">
+    <div
+      class="collapse navbar-collapse"
+      [class.collapse]="isMenuCollapsed"
+      id="navbarContent"
+    >
+      <a
+        class="navbar-brand"
+        (click)="isMenuCollapsed = true"
+        routerLink="/"
+        routerLinkActive="active"
+      >
         <img
           src="bootstrap-logo.svg"
           alt="Logo"
@@ -28,74 +36,161 @@
       </a>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active"
+          <a
+            class="nav-link"
+            (click)="isMenuCollapsed = true"
+            routerLink="/dashboard"
+            routerLinkActive="active"
             >Dashboard</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/users" routerLinkActive="active"
+          <a
+            class="nav-link"
+            (click)="isMenuCollapsed = true"
+            routerLink="/users"
+            routerLinkActive="active"
             >Users</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/leaves" routerLinkActive="active"
+          <a
+            class="nav-link"
+            (click)="isMenuCollapsed = true"
+            routerLink="/leaves"
+            routerLinkActive="active"
             >My leaves(Nested)</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/profile" routerLinkActive="active"
+          <a
+            class="nav-link"
+            (click)="isMenuCollapsed = true"
+            routerLink="/profile"
+            routerLinkActive="active"
             >My Profile</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/work" routerLinkActive="active"
+          <a
+            class="nav-link"
+            (click)="isMenuCollapsed = true"
+            routerLink="/work"
+            routerLinkActive="active"
             >My Work</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/attendance" routerLinkActive="active"
+          <a
+            class="nav-link"
+            (click)="isMenuCollapsed = true"
+            routerLink="/attendance"
+            routerLinkActive="active"
             >My Attendance</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/not-found" routerLinkActive="active"
+          <a
+            class="nav-link"
+            (click)="isMenuCollapsed = true"
+            routerLink="/not-found"
+            routerLinkActive="active"
             >Not Found</a
           >
         </li>
         <li class="nav-item">
           <a
+            (click)="isMenuCollapsed = true"
             class="nav-link"
             routerLink="/destroy-check"
             routerLinkActive="active"
             >Destroy Check</a
           >
         </li>
+        <li
+          class="nav-item"
+          ngbDropdown
+          display="dynamic"
+          placement="bottom-end"
+        >
+          <a
+            class="nav-link"
+            tabindex="0"
+            ngbDropdownToggle
+            id="navbarDropdown1"
+            role="button"
+          >
+            Dynamic
+          </a>
+          <div
+            ngbDropdownMenu
+            aria-labelledby="navbarDropdown1"
+            class="dropdown-menu"
+          >
+            <a
+              ngbDropdownItem
+              routerLink="/dashboard"
+              (click)="isMenuCollapsed = true"
+              >Dashboard</a
+            >
+            <a ngbDropdownItem routerLink="/" (click)="isMenuCollapsed = true"
+              >Home</a
+            >
+            <a
+              ngbDropdownItem
+              routerLink="/not-found"
+              (click)="isMenuCollapsed = true"
+              >Not Found</a
+            >
+          </div>
+        </li>
       </ul>
       <form class="d-flex" role="search">
-        <div class="dropdown">
+        <div ngbDropdown display="dynamic">
           <a
             class="btn btn-success dropdown-toggle"
-            href="#"
             role="button"
-            data-bs-toggle="dropdown"
-            data-bs-display="static"
-            aria-expanded="false"
+            ngbDropdownToggle
+            id="navbarDropdown2"
           >
             Profile
           </a>
 
-          <ul class="dropdown-menu dropdown-menu-lg-end">
-            <li>
-              <button class="dropdown-item" type="button" routerLink="/">
+          <div
+            class="dropdown-menu dropdown-menu-lg-end"
+            ngbDropdownMenu
+            aria-labelledby="navbarDropdown2"
+          >
+            <a ngbDropdownItem>
+              <button
+                class="dropdown-item"
+                type="button"
+                routerLink="/"
+                (click)="isMenuCollapsed = true"
+              >
                 Info
               </button>
-            </li>
-            <li>
-              <button class="dropdown-item" type="button" (click)="logout()">
+            </a>
+            <a ngbDropdownItem>
+              <button
+                class="dropdown-item"
+                type="button"
+                (click)="logout(); isMenuCollapsed = true"
+              >
                 Logout
               </button>
-            </li>
-          </ul>
+            </a>
+            <a ngbDropdownItem>
+              <button
+                class="dropdown-item"
+                type="button"
+                routerLink="/not-found"
+                (click)="isMenuCollapsed = true"
+              >
+                Not Found
+              </button>
+            </a>
+          </div>
         </div>
       </form>
     </div>

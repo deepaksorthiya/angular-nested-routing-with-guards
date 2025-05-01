@@ -7,11 +7,15 @@ import {
   OnInit,
 } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import {
+  NgbCollapseModule,
+  NgbDropdownModule,
+} from '@ng-bootstrap/ng-bootstrap';
+import { NgProgressbar } from 'ngx-progressbar';
+import { NgProgressRouter } from 'ngx-progressbar/router';
 import { AlertComponent } from './_components/alert.component';
 import { User } from './_models/user';
 import { AccountService } from './_services/account.service';
-import { NgProgressbar } from 'ngx-progressbar';
-import { NgProgressRouter } from 'ngx-progressbar/router';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +27,8 @@ import { NgProgressRouter } from 'ngx-progressbar/router';
     NgProgressRouter,
     CommonModule,
     AlertComponent,
+    NgbCollapseModule,
+    NgbDropdownModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -32,6 +38,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private readonly document = inject(DOCUMENT);
   private readonly selector = 'globalLoader';
+  isMenuCollapsed = true;
 
   constructor(private accountService: AccountService) {
     console.log('AppComponent constructor initialized.');
