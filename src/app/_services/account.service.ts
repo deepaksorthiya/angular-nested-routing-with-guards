@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { Post } from '../_models/post';
 import { User } from '../_models/user';
 
 @Injectable({ providedIn: 'root' })
@@ -30,6 +31,10 @@ export class AccountService {
 
   getAllUsers() {
     return this.http.get<User[]>('https://jsonplaceholder.typicode.com/users/');
+  }
+
+  getPostById(id: number) {
+    return this.http.get<Post>(`https://dummyjson.com/posts/${id}`);
   }
 
   login(username: string, password: string) {

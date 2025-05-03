@@ -1,1 +1,14 @@
-<p>profile works!</p>
+<div class="container">
+  <h1>Post Info Async</h1>
+  @if (post$ | async; as p) {
+  <p>Name: {{ p.title }}</p>
+  <p>Biography: {{ p.body }}</p>
+  <p>Views: {{ p.views }}</p>
+  }
+  <h1>Post Info Sync</h1>
+  @if (post) {
+  <p>Title: {{ post.title }}</p>
+  <p>Body: {{ post.body }}</p>
+  <p>Views: {{ post.views }}</p>
+  }
+</div>
