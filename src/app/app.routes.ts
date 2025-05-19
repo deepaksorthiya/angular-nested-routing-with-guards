@@ -16,37 +16,56 @@ const leavesModule = () =>
   import('./leaves/leaves.module').then((x) => x.LeavesModule);
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'users', loadChildren: usersModule, canActivate: [AuthGuard] },
-  { path: 'leaves', loadChildren: leavesModule, canActivate: [AuthGuard] },
+  {
+    path: '',
+    title: 'Home',
+    component: HomeComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'users',
+    loadChildren: usersModule,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'leaves',
+    loadChildren: leavesModule,
+    canActivate: [AuthGuard],
+  },
   { path: 'account', loadChildren: accountModule },
   {
     path: 'dashboard',
+    title: 'Dashboard',
     component: DashboardComponent,
     canActivate: [AuthGuard],
   },
   {
     path: 'profile',
+    title: 'Profile',
     component: ProfileComponent,
     canActivate: [AuthGuard],
   },
   {
     path: 'work',
+    title: 'Work',
     component: WorkComponent,
     canActivate: [AuthGuard],
   },
   {
     path: 'attendance',
+    title: 'Attendance',
     component: AttendanceComponent,
     canActivate: [AuthGuard],
   },
   {
     path: 'destroy-check',
+    title: 'Destroy Check',
     component: DestroyCheckComponent,
     canActivate: [AuthGuard],
   },
   {
     path: '**',
+    title: 'Not Found',
     component: Page404Component,
   },
 ];

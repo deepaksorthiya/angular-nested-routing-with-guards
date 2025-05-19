@@ -9,8 +9,8 @@ const routes: Routes = [
     {
         path: '', component: LayoutComponent,
         children: [
-            { path: 'login', component: LoginComponent },
-            { path: 'register', component: RegisterComponent }
+            { path: 'login', title:'Login', component: LoginComponent },
+            { path: 'register', title:'Register', component: RegisterComponent }
         ]
     }
 ];

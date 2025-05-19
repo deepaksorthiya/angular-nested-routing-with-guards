@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ApplyComponent } from './apply/apply.component';
+import { HolidayComponent } from './holiday/holiday.component';
 import { LeavesComponent } from './leaves.component';
 import { Page404leavesComponent } from './page404leaves/page404leaves.component';
-import { HolidayComponent } from './holiday/holiday.component';
 
 const routes: Routes = [
   {
@@ -12,10 +12,12 @@ const routes: Routes = [
     children: [
       {
         path: 'apply',
+        title: 'Apply',
         component: ApplyComponent,
       },
       {
         path: 'holiday',
+        title: 'Holiday',
         component: HolidayComponent,
       },
       {
@@ -25,10 +27,15 @@ const routes: Routes = [
       },
       {
         path: '',
+        title: 'Apply',
         redirectTo: 'apply',
         pathMatch: 'full',
       },
-      { path: '**', component: Page404leavesComponent },
+      {
+        path: '**',
+        title: 'Leave 404 Not Found',
+        component: Page404leavesComponent,
+      },
     ],
   },
 ];

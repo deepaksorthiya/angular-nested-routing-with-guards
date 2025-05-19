@@ -13,6 +13,7 @@ export class LeavesComponent {
     { title: 'Apply', link: 'apply' },
     { title: 'Holiday', link: 'holiday' },
     { title: 'Balance', link: 'balance' },
+    { title: 'Bad Link', link: 'badlink' },
   ];
 
   constructor(public route: ActivatedRoute) {}

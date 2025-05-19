@@ -12,18 +12,21 @@ const routes: Routes = [
     children: [
       {
         path: 'casual',
+        title: 'Casual',
         component: CasualComponent,
       },
       {
         path: 'earned',
+        title: 'Earned',
         component: EarnedComponent,
       },
       {
         path: '',
+        title: 'Casual',
         redirectTo: 'casual',
         pathMatch: 'full',
       },
-      { path: '**', component: Page404balanceComponent },
+      { path: '**', title: 'Not Found', component: Page404balanceComponent },
     ],
   },
 ];
