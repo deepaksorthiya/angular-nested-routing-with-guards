@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, EMPTY, Observable } from 'rxjs';
 import { Post } from '../_models/post';
 import { AccountService } from '../_services/account.service';
 
@@ -24,7 +24,13 @@ export class ProfileComponent {
   }
 
   getPostByIdAsync() {
-    this.post$ = this.accountService.getPostById(this.postId);
+    this.post$ = this.accountService.getPostById(this.postId).pipe(
+      catchError((error) => {
+        // Handle the error here
+        console.error('Error fetching post :: ', error);
+        return EMPTY;
+      })
+    );
   }
 
   getPostByIdSync() {

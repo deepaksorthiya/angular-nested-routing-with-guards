@@ -6,6 +6,7 @@ import { DestroyCheckComponent } from './destroy-check/destroy-check.component';
 import { HomeComponent } from './home/home.component';
 import { Page404Component } from './page404/page404.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UsersTableComponent } from './users-table/users-table.component';
 import { WorkComponent } from './work/work.component';
 
 const accountModule = () =>
@@ -61,6 +62,12 @@ export const routes: Routes = [
     path: 'destroy-check',
     title: 'Destroy Check',
     component: DestroyCheckComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'users-table',
+    title: 'Users Table',
+    component: UsersTableComponent,
     canActivate: [AuthGuard],
   },
   {
