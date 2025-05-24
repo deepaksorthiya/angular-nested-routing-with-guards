@@ -2,10 +2,12 @@
 import { Router } from '@angular/router';
 import { User } from '../_models/user';
 import { AccountService } from '../_services/account.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   templateUrl: 'home.component.html',
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule],
 })
 export class HomeComponent {
   user: User | null;

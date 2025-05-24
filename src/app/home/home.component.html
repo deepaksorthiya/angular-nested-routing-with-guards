@@ -1,6 +1,7 @@
 ﻿<div class="p-4">
     <div class="container">
         <h1>Hi {{user?.firstName}}!</h1>
+        <p>User JSON :: {{user | json}}</p>
         <p>You're logged in with Angular 19!!</p>
         <button type="button" class="btn btn-primary" (click)="manageUsers()">Manage Users</button>
     </div>
