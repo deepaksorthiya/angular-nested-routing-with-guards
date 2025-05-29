@@ -1,8 +1,5 @@
-﻿<nav
-  class="navbar navbar-expand-lg bg-body-tertiary"
-  *ngIf="user"
-  data-bs-theme="dark"
->
+﻿@if (user) {
+<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
   <div class="container-fluid">
     <button
       class="navbar-toggler"
@@ -164,7 +161,6 @@
           >
             Profile
           </a>
-
           <div
             class="dropdown-menu dropdown-menu-lg-end"
             ngbDropdownMenu
@@ -205,6 +201,7 @@
     </div>
   </div>
 </nav>
+}
 <ng-progress ngProgressRouter />
 <alert></alert>
 <router-outlet></router-outlet>
