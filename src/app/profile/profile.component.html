@@ -11,4 +11,8 @@
   <p>Body: {{ post.body }}</p>
   <p>Views: {{ post.views }}</p>
   }
+  <h1>DateTime Info Async</h1>
+  @if (dateAndTime$ | async; as dt){
+  <p>DateTime: {{ dt }}</p>
+  }
 </div>

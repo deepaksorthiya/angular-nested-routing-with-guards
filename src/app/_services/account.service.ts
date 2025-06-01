@@ -1,4 +1,4 @@
-﻿import { HttpClient } from '@angular/common/http';
+﻿import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -35,6 +35,13 @@ export class AccountService {
 
   getPostById(id: number) {
     return this.http.get<Post>(`https://dummyjson.com/posts/${id}`);
+  }
+
+  getDateTimeAsync(date: string) {
+    const baseParams = new HttpParams().set('offsetDateTime', date);
+    return this.http.get<any>(`http://localhost:8080/offset`, {
+      params: baseParams,
+    });
   }
 
   login(username: string, password: string) {

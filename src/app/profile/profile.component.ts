@@ -15,12 +15,14 @@ export class ProfileComponent {
   post$!: Observable<Post>;
   post: Post | undefined;
   postId: number = 1;
+  dateAndTime$!: Observable<any>;
 
   constructor(private accountService: AccountService) {}
 
   ngOnInit(): void {
     this.getPostByIdAsync();
     this.getPostByIdSync();
+    this.getDateTimeAsync();
   }
 
   getPostByIdAsync() {
@@ -28,6 +30,17 @@ export class ProfileComponent {
       catchError((error) => {
         // Handle the error here
         console.error('Error fetching post :: ', error);
+        return EMPTY;
+      })
+    );
+  }
+
+  getDateTimeAsync() {
+    const date = '2025-05-31T14:21:26+05:30';
+    this.dateAndTime$ = this.accountService.getDateTimeAsync(date).pipe(
+      catchError((error) => {
+        // Handle the error here
+        console.error('Error :: ', error);
         return EMPTY;
       })
     );
