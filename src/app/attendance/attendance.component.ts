@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
   templateUrl: './attendance.component.html',
   styleUrl: './attendance.component.css',
 })
-export class AttendanceComponent {}
+export class AttendanceComponent {
+  constructor() {
+    console.log('AttendanceComponent initialized.');
+    this.myArrowFunction();
+  }
+
+  myArrowFunction = () => {
+    console.log('Hello from myArrowFunction!');
+  };
+}
