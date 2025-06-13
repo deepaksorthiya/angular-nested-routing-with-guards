@@ -1,37 +1,119 @@
-# Angular Nested Routing
+# Angular Nested Routing with Auth Guards
 
----
-
-### ** Angular nested routing with auth guards example **
-
----
-
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.14.
+A sample Angular project demonstrating nested routing and authentication guards. This project uses Angular CLI version 19.2.14.
 
 ## Demo
 
-[Check Live Demo Here](https://deepaksorthiya.github.io/angular-nested-routing-with-guards/
-)
+[Live Demo](https://deepaksorthiya.github.io/angular-nested-routing-with-guards/)
 
-## Development server
+---
 
-To start a local development server, run:
+## Table of Contents
 
-```bash
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Available Scripts](#available-scripts)
+- [Code Generation Commands](#code-generation-commands)
+- [Building](#building)
+- [Testing](#testing)
+- [Deployment](#deployment)
+- [Additional Resources](#additional-resources)
+
+---
+
+## Features
+
+- Nested routing with child modules
+- Route guards for authentication
+- Example components for dashboard, profile, attendance, work, login, and error pages
+- Lazy-loaded modules
+- Angular reactive forms
+
+---
+
+## Project Structure
+
+```
+angular-nested-routing-with-guards/
+├── src/
+│   ├── app/
+│   │   ├── account/
+│   │   ├── attendance/
+│   │   ├── dashboard/
+│   │   ├── guards/
+│   │   ├── leaves/
+│   │   ├── login/
+│   │   ├── profile/
+│   │   ├── services/
+│   │   ├── users/
+│   │   └── work/
+│   ├── assets/
+│   ├── environments/
+│   ├── index.html
+│   ├── main.ts
+│   └── styles.scss
+├── angular.json
+├── package.json
+├── README.md
+└── ...
+```
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v18 or higher recommended)
+- [Angular CLI](https://angular.dev/tools/cli)
+
+### Installation
+
+1. Clone the repository:
+
+   ```sh
+   git clone https://github.com/deepaksorthiya/angular-nested-routing-with-guards.git
+   cd angular-nested-routing-with-guards
+   ```
+
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+
+### Running the Development Server
+
+Start the local server:
+
+```sh
 ng serve
 ```
 
-## Command Used to generate project
+Open [http://localhost:4200/](http://localhost:4200/) in your browser.
 
-```
+---
 
+## Available Scripts
+
+- `ng serve` — Run the development server
+- `ng build` — Build the project for production
+- `ng test` — Run unit tests with Karma
+- `ng e2e` — Run end-to-end tests
+
+---
+
+## Code Generation Commands
+
+The following Angular CLI commands were used to scaffold this project:
+
+```sh
 ng generate component dashboard --skip-tests
 ng generate component profile --skip-tests
 ng generate component page404 --skip-tests
 ng generate component attendance --skip-tests
 ng generate component work --skip-tests
 ng generate component login --skip-tests
-
 
 ng generate module leaves --routing
 ng generate component leaves --standalone false -m leaves --skip-tests
@@ -47,61 +129,54 @@ ng generate component leaves/balance/page404balance --standalone false -m balanc
 
 ng generate service services/auth --skip-tests
 ng generate service services/authguard --skip-tests
-
 ng generate guard guards/auth --skip-tests
-
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-### Deploy to GitHub Pages
-
-```bash
-ng deploy --base-href=/angular-nested-routing-with-guards/
-```
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
+---
 
 ## Building
 
-To build the project run:
+To build the project for production:
 
-```bash
+```sh
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+---
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Testing
 
-```bash
+### Unit Tests
+
+Run unit tests with Karma:
+
+```sh
 ng test
 ```
 
-## Running end-to-end tests
+### End-to-End Tests
 
-For end-to-end (e2e) testing, run:
+Run e2e tests (configure your preferred framework):
 
-```bash
+```sh
 ng e2e
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
+
+## Deployment
+
+To deploy to GitHub Pages:
+
+```sh
+ng deploy --base-href=/angular-nested-routing-with-guards/
+```
+
+---
 
 ## Additional Resources
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli)
+- [Angular Documentation](https://angular.dev/)
