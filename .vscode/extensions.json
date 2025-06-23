@@ -1,4 +1,15 @@
 {
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=827846
-  "recommendations": ["angular.ng-template"]
+  "recommendations": [
+    "angular.ng-template",
+    "pkief.material-icon-theme",
+    "cyrilletuzi.angular-schematics",
+    "editorconfig.editorconfig",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "apk27.ngx-translate-lookup",
+    "stylelint.vscode-stylelint",
+    "syler.sass-indented",
+    "mrmlnc.vscode-scss"
+  ]
 }
