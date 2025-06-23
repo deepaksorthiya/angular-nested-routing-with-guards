@@ -1,11 +1,9 @@
 <div class="container-fluid my-2">
   <ul ngbNav [activeId]="route.url | async" class="nav-tabs">
     @for (link of routingLinks; track link) {
-    <li [ngbNavItem]="link.link">
-      <a ngbNavLink routerLink="{{ link.link }}" routerLinkActive="active">{{
-        link.title
-      }}</a>
-    </li>
+      <li [ngbNavItem]="link.link">
+        <a ngbNavLink routerLink="{{ link.link }}" routerLinkActive="active">{{ link.title }}</a>
+      </li>
     }
   </ul>
   <router-outlet></router-outlet>

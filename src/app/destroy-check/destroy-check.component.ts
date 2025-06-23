@@ -1,12 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import {
-  Component,
-  DestroyRef,
-  Inject,
-  inject,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { Component, DestroyRef, Inject, inject, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-destroy-check',
@@ -24,7 +17,7 @@ export class DestroyCheckComponent implements OnInit, OnDestroy {
   ) {
     this.win = this.document.defaultView;
     if (this.win) {
-      this.win.navigator.geolocation.getCurrentPosition((position) => {
+      this.win.navigator.geolocation.getCurrentPosition(position => {
         console.log('Position :: ' + position);
       });
     }

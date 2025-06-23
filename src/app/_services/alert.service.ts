@@ -11,7 +11,7 @@ export class AlertService {
 
   // enable subscribing to alerts observable
   onAlert(id = this.defaultId): Observable<Alert> {
-    return this.subject.asObservable().pipe(filter((x) => x && x.id === id));
+    return this.subject.asObservable().pipe(filter(x => x && x.id === id));
   }
 
   // convenience methods

@@ -9,12 +9,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { UsersTableComponent } from './users-table/users-table.component';
 import { WorkComponent } from './work/work.component';
 
-const accountModule = () =>
-  import('./account/account.module').then((x) => x.AccountModule);
-const usersModule = () =>
-  import('./users/users.module').then((x) => x.UsersModule);
-const leavesModule = () =>
-  import('./leaves/leaves.module').then((x) => x.LeavesModule);
+const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
+const usersModule = () => import('./users/users.module').then(x => x.UsersModule);
+const leavesModule = () => import('./leaves/leaves.module').then(x => x.LeavesModule);
 
 export const routes: Routes = [
   {

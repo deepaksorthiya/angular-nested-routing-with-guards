@@ -12,10 +12,11 @@ export class AccountService {
   private userSubject: BehaviorSubject<User | null>;
   public user: Observable<User | null>;
 
-  constructor(private router: Router, private http: HttpClient) {
-    this.userSubject = new BehaviorSubject(
-      JSON.parse(localStorage.getItem('user')!)
-    );
+  constructor(
+    private router: Router,
+    private http: HttpClient
+  ) {
+    this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
     this.user = this.userSubject.asObservable();
   }
 
@@ -24,9 +25,7 @@ export class AccountService {
   }
 
   callFakeRestApi() {
-    return this.http.get(
-      'https://jsonplaceholder.typicode.com/posts/1/comments'
-    );
+    return this.http.get('https://jsonplaceholder.typicode.com/posts/1/comments');
   }
 
   getAllUsers() {
@@ -51,7 +50,7 @@ export class AccountService {
         password,
       })
       .pipe(
-        map((user) => {
+        map(user => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('user', JSON.stringify(user));
           this.userSubject.next(user);
@@ -81,7 +80,7 @@ export class AccountService {
 
   update(id: string, params: any) {
     return this.http.put(`${environment.apiUrl}/users/${id}`, params).pipe(
-      map((x) => {
+      map(x => {
         // update stored user if the logged in user updated their own record
         if (id == this.userValue?.id) {
           // update local storage
@@ -98,7 +97,7 @@ export class AccountService {
 
   delete(id: string) {
     return this.http.delete(`${environment.apiUrl}/users/${id}`).pipe(
-      map((x) => {
+      map(x => {
         // auto logout if the logged in user deleted their own record
         if (id == this.userValue?.id) {
           this.logout();

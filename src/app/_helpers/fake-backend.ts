@@ -3,7 +3,7 @@
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
-  HttpResponse
+  HttpResponse,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
@@ -15,10 +15,7 @@ let users: any[] = JSON.parse(localStorage.getItem(usersKey)!) || [];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
-  intercept(
-    request: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const { url, method, headers, body } = request;
 
     return handleRoute();
@@ -47,9 +44,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     function authenticate() {
       const { username, password } = body;
-      const user = users.find(
-        (x) => x.username === username && x.password === password
-      );
+      const user = users.find(x => x.username === username && x.password === password);
       if (!user) return error('Username or password is incorrect');
       return ok({
         ...basicDetails(user),
@@ -60,11 +55,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     function register() {
       const user = body;
 
-      if (users.find((x) => x.username === user.username)) {
+      if (users.find(x => x.username === user.username)) {
         return error('Username "' + user.username + '" is already taken');
       }
 
-      user.id = users.length ? Math.max(...users.map((x) => x.id)) + 1 : 1;
+      user.id = users.length ? Math.max(...users.map(x => x.id)) + 1 : 1;
       users.push(user);
       localStorage.setItem(usersKey, JSON.stringify(users));
       return ok();
@@ -72,13 +67,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     function getUsers() {
       if (!isLoggedIn()) return unauthorized();
-      return ok(users.map((x) => basicDetails(x)));
+      return ok(users.map(x => basicDetails(x)));
     }
 
     function getUserById() {
       if (!isLoggedIn()) return unauthorized();
 
-      const user = users.find((x) => x.id === idFromUrl());
+      const user = users.find(x => x.id === idFromUrl());
       return ok(basicDetails(user));
     }
 
@@ -86,7 +81,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       if (!isLoggedIn()) return unauthorized();
 
       let params = body;
-      let user = users.find((x) => x.id === idFromUrl());
+      let user = users.find(x => x.id === idFromUrl());
 
       // only update password if entered
       if (!params.password) {
@@ -103,7 +98,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     function deleteUser() {
       if (!isLoggedIn()) return unauthorized();
 
-      users = users.filter((x) => x.id !== idFromUrl());
+      users = users.filter(x => x.id !== idFromUrl());
       localStorage.setItem(usersKey, JSON.stringify(users));
       return ok();
     }

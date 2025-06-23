@@ -41,12 +41,12 @@ export const appConfig: ApplicationConfig = {
         .callFakeRestApi()
         .pipe(delay(2000))
         .pipe(
-          tap((data) => {
+          tap(data => {
             console.log(data);
           })
         )
         .pipe(
-          catchError((error) => {
+          catchError(error => {
             // Handle the error here
             console.error('ERROR :: ', error);
             return of([]);
@@ -59,21 +59,19 @@ export const appConfig: ApplicationConfig = {
         .get('https://jsonplaceholder.typicode.com/posts/1/comments')
         .pipe(delay(2000))
         .pipe(
-          tap((data) => {
+          tap(data => {
             console.log(data);
           })
         )
         .pipe(
-          catchError((error) => {
+          catchError(error => {
             // Handle the error here
             console.error('ERROR :: ', error);
             return of([]);
           })
         );
     }),
-    provideAppInitializer(
-      () => new Promise<void>((resolve) => setTimeout(resolve, 2000))
-    ),
+    provideAppInitializer(() => new Promise<void>(resolve => setTimeout(resolve, 2000))),
     provideHttpClient(withInterceptorsFromDi()),
   ],
 };

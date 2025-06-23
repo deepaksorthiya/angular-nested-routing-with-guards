@@ -27,7 +27,7 @@ export class ProfileComponent {
 
   getPostByIdAsync() {
     this.post$ = this.accountService.getPostById(this.postId).pipe(
-      catchError((error) => {
+      catchError(error => {
         // Handle the error here
         console.error('Error fetching post :: ', error);
         return EMPTY;
@@ -38,7 +38,7 @@ export class ProfileComponent {
   getDateTimeAsync() {
     const date = '2025-05-31T14:21:26+05:30';
     this.dateAndTime$ = this.accountService.getDateTimeAsync(date).pipe(
-      catchError((error) => {
+      catchError(error => {
         // Handle the error here
         console.error('Error :: ', error);
         return EMPTY;
@@ -48,11 +48,11 @@ export class ProfileComponent {
 
   getPostByIdSync() {
     this.accountService.getPostById(this.postId).subscribe({
-      next: (post) => {
+      next: post => {
         this.post = post;
         console.log('Post fetched successfully :: ', this.post);
       },
-      error: (error) => {
+      error: error => {
         console.error('Error fetching post :: ', error);
       },
       complete: () => {

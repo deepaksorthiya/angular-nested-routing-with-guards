@@ -8,12 +8,7 @@ import { LeavesComponent } from './leaves.component';
 import { Page404leavesComponent } from './page404leaves/page404leaves.component';
 
 @NgModule({
-  declarations: [
-    LeavesComponent,
-    ApplyComponent,
-    Page404leavesComponent,
-    HolidayComponent,
-  ],
+  declarations: [LeavesComponent, ApplyComponent, Page404leavesComponent, HolidayComponent],
   imports: [CommonModule, LeavesRoutingModule, NgbNavModule],
 })
 export class LeavesModule {}

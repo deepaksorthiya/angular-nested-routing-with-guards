@@ -22,8 +22,7 @@ const routes: Routes = [
       },
       {
         path: 'balance',
-        loadChildren: () =>
-          import(`./balance/balance.module`).then((m) => m.BalanceModule),
+        loadChildren: () => import(`./balance/balance.module`).then(m => m.BalanceModule),
       },
       {
         path: '',

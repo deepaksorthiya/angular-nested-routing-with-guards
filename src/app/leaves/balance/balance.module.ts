@@ -9,12 +9,7 @@ import { EarnedComponent } from './earned/earned.component';
 import { Page404balanceComponent } from './page404balance/page404balance.component';
 
 @NgModule({
-  declarations: [
-    BalanceComponent,
-    CasualComponent,
-    EarnedComponent,
-    Page404balanceComponent,
-  ],
+  declarations: [BalanceComponent, CasualComponent, EarnedComponent, Page404balanceComponent],
   imports: [CommonModule, BalanceRoutingModule, NgbNavModule],
 })
 export class BalanceModule {}

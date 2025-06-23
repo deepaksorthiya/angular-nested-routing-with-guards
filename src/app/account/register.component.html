@@ -11,11 +11,11 @@
           [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
         />
         @if (submitted && f.firstName.errors) {
-        <div class="invalid-feedback">
-          @if (f.firstName.errors.required) {
-          <div>First Name is required</div>
-          }
-        </div>
+          <div class="invalid-feedback">
+            @if (f.firstName.errors.required) {
+              <div>First Name is required</div>
+            }
+          </div>
         }
       </div>
       <div class="mb-3">
@@ -27,11 +27,11 @@
           [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
         />
         @if (submitted && f.lastName.errors) {
-        <div class="invalid-feedback">
-          @if (f.lastName.errors.required) {
-          <div>Last Name is required</div>
-          }
-        </div>
+          <div class="invalid-feedback">
+            @if (f.lastName.errors.required) {
+              <div>Last Name is required</div>
+            }
+          </div>
         }
       </div>
       <div class="mb-3">
@@ -43,11 +43,11 @@
           [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
         />
         @if (submitted && f.username.errors) {
-        <div class="invalid-feedback">
-          @if (f.username.errors.required) {
-          <div>Username is required</div>
-          }
-        </div>
+          <div class="invalid-feedback">
+            @if (f.username.errors.required) {
+              <div>Username is required</div>
+            }
+          </div>
         }
       </div>
       <div class="mb-3">
@@ -59,20 +59,22 @@
           [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
         />
         @if (submitted && f.password.errors) {
-        <div class="invalid-feedback">
-          @if (f.password.errors.required) {
-          <div>Password is required</div>
-          } @if (f.password.errors.minlength) {
-          <div>Password must be at least 6 characters</div>
-          }
-        </div>
+          <div class="invalid-feedback">
+            @if (f.password.errors.required) {
+              <div>Password is required</div>
+            }
+            @if (f.password.errors.minlength) {
+              <div>Password must be at least 6 characters</div>
+            }
+          </div>
         }
       </div>
       <div>
         <button [disabled]="loading" class="btn btn-primary">
           @if (loading) {
-          <span class="spinner-border spinner-border-sm me-1"></span>
-          } Register
+            <span class="spinner-border spinner-border-sm me-1"></span>
+          }
+          Register
         </button>
         <a routerLink="../login" class="btn btn-link">Cancel</a>
       </div>

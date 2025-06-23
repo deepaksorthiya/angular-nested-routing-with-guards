@@ -35,13 +35,13 @@ export class UsersTableComponent implements OnInit {
     this.userService
       .getAllUsers(this.currentPage, this.itemsPerPage)
       .pipe(
-        catchError((error) => {
+        catchError(error => {
           this.error = 'Failed to load users. Please try again later.';
           this.isLoading = false;
           return throwError(() => error);
         })
       )
-      .subscribe((response) => {
+      .subscribe(response => {
         this.users = response?.results || [];
         this.isLoading = false;
       });
