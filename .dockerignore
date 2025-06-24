@@ -1,0 +1,73 @@
+# Include any files or directories that you don't want to be copied to your
+# container here (e.g., local build artifacts, temporary files, etc.).
+#
+# For more help, visit the .dockerignore file reference guide at
+# https://docs.docker.com/go/build-context-dockerignore/
+
+
+# ================================
+# Node and build output
+# ================================
+node_modules
+dist
+out-tsc
+.angular
+.cache
+.tmp
+
+# ================================
+# Testing & Coverage
+# ================================
+coverage
+jest
+cypress
+cypress/screenshots
+cypress/videos
+reports
+playwright-report
+.vite
+.vitepress
+
+# ================================
+# Environment & log files
+# ================================
+*.env*
+!*.env.production
+*.log
+*.tsbuildinfo
+
+# ================================
+# IDE & OS-specific files
+# ================================
+.vscode
+.idea
+.DS_Store
+Thumbs.db
+*.swp
+
+# ================================
+# Version control & CI files
+# ================================
+.git
+.gitignore
+
+# ================================
+# Docker & local orchestration
+# ================================
+Dockerfile
+Dockerfile.*
+.dockerignore
+docker-compose.yml
+docker-compose*.yml
+
+# ================================
+# Miscellaneous
+# ================================
+*.bak
+*.old
+*.tmp
+**/.classpath
+**/.project
+**/.settings
+**/.toolstarget
+README.md
