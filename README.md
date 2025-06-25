@@ -94,6 +94,15 @@ Open [http://localhost:4200/](http://localhost:4200/) in your browser.
 
 ---
 
+### Running On Kubernetes Minikube
+
+```sh
+kubectl apply -f k8s
+kubectl port-forward service/angular-nested-routing-with-guards-service 30001:8080
+```
+
+---
+
 ## Available Scripts
 
 - `ng serve` — Run the development server
