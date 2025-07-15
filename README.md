@@ -1,6 +1,6 @@
 # Angular Nested Routing with Auth Guards
 
-A sample Angular project demonstrating nested routing and authentication guards. This project uses Angular CLI version 19.2.15.
+A sample Angular project demonstrating nested routing and authentication guards. This project uses Angular CLI version 20.1.0.
 
 ## Demo
 
