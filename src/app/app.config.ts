@@ -2,6 +2,7 @@ import {
   HTTP_INTERCEPTORS,
   HttpClient,
   provideHttpClient,
+  withFetch,
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import {
@@ -72,6 +73,6 @@ export const appConfig: ApplicationConfig = {
         );
     }),
     provideAppInitializer(() => new Promise<void>(resolve => setTimeout(resolve, 2000))),
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withFetch(), withInterceptorsFromDi()),
   ],
 };

@@ -10,8 +10,17 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
+      time: "23:59"
+      timezone: "Asia/Calcutta"
+    open-pull-requests-limit: 50
+    ignore:
+      - dependency-name: "*"
+        update-types: [ "version-update:semver-patch" ]
   # Enable version updates for Github Action
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "daily"
+      time: "23:59"
+      timezone: "Asia/Calcutta"
+    open-pull-requests-limit: 50
