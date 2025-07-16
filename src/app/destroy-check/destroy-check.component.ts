@@ -1,5 +1,4 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, DestroyRef, Inject, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, DestroyRef, Inject, inject, OnDestroy, OnInit, DOCUMENT } from '@angular/core';
 
 @Component({
   selector: 'app-destroy-check',
@@ -11,6 +10,7 @@ export class DestroyCheckComponent implements OnInit, OnDestroy {
   count = 0;
   id: number;
   win: (Window & typeof globalThis) | null;
+
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private window: Window
