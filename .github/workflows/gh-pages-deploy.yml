@@ -29,16 +29,21 @@ jobs:
           cache-dependency-path: package-lock.json
 
       - name: Install npm dependencies
-        run: npm ci
+        run: |
+          npm install
+          npm ci
 
       - name: Build
-        run: npm run build
+        run: |
+          npm run build
         # require to fix 404 issue when page reload
       - name: Copy Of Index file to 404
-        run: cp dist/angular-nested-routing-with-guards/browser/index.html dist/angular-nested-routing-with-guards/browser/404.html
+        run: |
+          cp dist/angular-nested-routing-with-guards/browser/index.html dist/angular-nested-routing-with-guards/browser/404.html
 
       - name: Deploy to Github Pages
-        run: npx ng deploy
+        run: |
+          npx ng deploy
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # clean and install packages
