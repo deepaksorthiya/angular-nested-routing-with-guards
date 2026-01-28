@@ -33,7 +33,7 @@
     "@angular/build": "20.3.14",
     "@angular/cli": "20.3.14",
     "@angular/compiler-cli": "20.3.16",
-    "@angular/localize": "20.3.16",
+    "@angular/localize": "21.1.1",
     "@types/jasmine": "5.1.8",
     "jasmine-core": "5.13.0",
     "karma": "6.4.4",
