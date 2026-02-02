@@ -11,7 +11,7 @@ A sample Angular project demonstrating nested routing and authentication guards.
 ```
 Node: 24+
 Package Manager: npm 11.6+
-Angular CLI: 20.3.14
+Angular CLI: 20.3.15
 Angular: 20.3.16
 ```
 
@@ -193,6 +193,16 @@ ng deploy --base-href=/angular-nested-routing-with-guards/
 ```
 
 ---
+
+## Angular Upgrade and Proxy
+
+```sh
+ng update @angular/core@20 @angular/cli@20
+
+ng update @angular/core@21 @angular/cli@21
+
+ng serve --proxy-config src/proxy.dev.conf.json
+```
 
 ## Additional Resources
 

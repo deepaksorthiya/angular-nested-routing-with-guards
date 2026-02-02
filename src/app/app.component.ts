@@ -7,6 +7,7 @@ import { NgProgressRouter } from 'ngx-progressbar/router';
 import { AlertComponent } from './_components/alert.component';
 import { User } from './_models/user';
 import { AccountService } from './_services/account.service';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -38,6 +39,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
     console.log('AppComponent ngOnInit() initialized.');
+    console.log(environment);
   }
 
   ngOnDestroy(): void {
