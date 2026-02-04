@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AccountService } from '../_services/account.service';
@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
+      username: ['user', Validators.required],
+      password: ['password', Validators.required],
     });
   }
 
@@ -51,8 +51,9 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
-          // get return url from query parameters or default to home page
-          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+          // get return url from sessionStorage or default to home page
+          let returnUrl = sessionStorage.getItem('returnUrl') || '/';
+          sessionStorage.removeItem('returnUrl');
           this.router.navigateByUrl(returnUrl);
         },
         error: error => {

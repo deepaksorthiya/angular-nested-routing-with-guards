@@ -162,6 +162,16 @@
                 <button
                   class="dropdown-item"
                   type="button"
+                  routerLink="/account/login"
+                  (click)="isMenuCollapsed = true"
+                >
+                  Login
+                </button>
+              </a>
+              <a ngbDropdownItem>
+                <button
+                  class="dropdown-item"
+                  type="button"
                   (click)="logout(); isMenuCollapsed = true"
                 >
                   Logout

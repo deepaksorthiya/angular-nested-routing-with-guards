@@ -21,7 +21,10 @@ export class AccountService {
   }
 
   public get userValue() {
-    return this.userSubject.value;
+    if (localStorage.getItem('user')) {
+      return this.userSubject.value;
+    }
+    return null;
   }
 
   callFakeRestApi() {

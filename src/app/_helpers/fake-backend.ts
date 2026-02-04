@@ -1,4 +1,4 @@
-﻿import {
+import {
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
@@ -10,8 +10,10 @@ import { Observable, of, throwError } from 'rxjs';
 import { delay, dematerialize, materialize } from 'rxjs/operators';
 
 // array in local storage for registered users
-const usersKey = 'angular-14-registration-login-example-users';
-let users: any[] = JSON.parse(localStorage.getItem(usersKey)!) || [];
+let users: any[] = [
+  { firstName: 'user', lastName: 'user', username: 'user', password: 'password', id: '1' },
+  { firstName: 'admin', lastName: 'admin', username: 'admin', password: 'password', id: '2' },
+];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -61,7 +63,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
       user.id = users.length ? Math.max(...users.map(x => x.id)) + 1 : 1;
       users.push(user);
-      localStorage.setItem(usersKey, JSON.stringify(users));
       return ok();
     }
 
@@ -90,8 +91,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
       // update and save user
       Object.assign(user, params);
-      localStorage.setItem(usersKey, JSON.stringify(users));
-
       return ok();
     }
 
@@ -99,7 +98,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       if (!isLoggedIn()) return unauthorized();
 
       users = users.filter(x => x.id !== idFromUrl());
-      localStorage.setItem(usersKey, JSON.stringify(users));
       return ok();
     }
 

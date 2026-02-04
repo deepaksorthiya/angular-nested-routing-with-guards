@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { AuthGuard } from './_helpers/auth.guard';
+import { authGuard } from './_helpers/auth.guard';
 import { AttendanceComponent } from './attendance/attendance.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DestroyCheckComponent } from './destroy-check/destroy-check.component';
@@ -18,54 +18,54 @@ export const routes: Routes = [
     path: '',
     title: 'Home',
     component: HomeComponent,
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
   },
   {
     path: 'users',
     loadChildren: usersModule,
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
   },
   {
     path: 'leaves',
     loadChildren: leavesModule,
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
   },
   { path: 'account', loadChildren: accountModule },
   {
     path: 'dashboard',
     title: 'Dashboard',
     component: DashboardComponent,
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
   },
   {
     path: 'profile',
     title: 'Profile',
     component: ProfileComponent,
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
   },
   {
     path: 'work',
     title: 'Work',
     component: WorkComponent,
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
   },
   {
     path: 'attendance',
     title: 'Attendance',
     component: AttendanceComponent,
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
   },
   {
     path: 'destroy-check',
     title: 'Destroy Check',
     component: DestroyCheckComponent,
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
   },
   {
     path: 'users-table',
     title: 'Users Table',
     component: UsersTableComponent,
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
   },
   {
     path: '**',
