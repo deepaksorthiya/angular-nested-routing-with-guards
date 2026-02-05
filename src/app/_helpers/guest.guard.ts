@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { AccountService } from '../_services/account.service';
+import { AuthService } from './auth.service';
 /**
  * This guard restricts access to login and register routes for authenticated users.
  * @param _
@@ -8,12 +8,11 @@ import { AccountService } from '../_services/account.service';
  * @returns
  */
 export const guestGuard: CanActivateFn = (route, state) => {
-  const accountService = inject(AccountService);
+  const authService = inject(AuthService);
   const router = inject(Router);
 
-  const user = accountService.userValue;
   // if user is not authenticated, allow access
-  if (!user) {
+  if (!authService.isAuthenticated()) {
     return true;
   }
   // if user is already authenticated then redirect to home page

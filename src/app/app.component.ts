@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, inject, OnDestroy, OnInit, DOCUMENT } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { AfterViewInit, Component, DOCUMENT, inject, OnDestroy, OnInit } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { NgbCollapseModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgProgressbar } from 'ngx-progressbar';
 import { NgProgressRouter } from 'ngx-progressbar/router';
-import { AlertComponent } from './_components/alert.component';
-import { User } from './_models/user';
-import { AccountService } from './_services/account.service';
 import { environment } from '../environments/environment';
+import { AlertComponent } from './_components/alert.component';
+import { AuthService } from './_helpers/auth.service';
+import { User } from './_models/user';
 
 @Component({
   selector: 'app-root',
@@ -32,12 +32,15 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   private readonly selector = 'globalLoader';
   isMenuCollapsed = true;
 
-  constructor(private accountService: AccountService) {
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {
     console.log('AppComponent constructor initialized.');
-    this.accountService.user.subscribe(x => (this.user = x));
   }
 
   ngOnInit(): void {
+    this.authService.user.subscribe(x => (this.user = x));
     console.log('AppComponent ngOnInit() initialized.');
     console.log(environment);
   }
@@ -69,6 +72,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   logout() {
-    this.accountService.logout();
+    this.authService.logout();
+    this.router.navigate(['/account/login']);
   }
 }

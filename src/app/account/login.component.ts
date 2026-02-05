@@ -1,8 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs/operators';
-import { AccountService } from '../_services/account.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../_helpers/auth.service';
+import { AuthStorageService } from '../_helpers/auth.storage.service';
 import { AlertService } from '../_services/alert.service';
 
 @Component({
@@ -16,9 +16,9 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
-    private accountService: AccountService,
+    private authService: AuthService,
+    private authStorageService: AuthStorageService,
     private alertService: AlertService
   ) {}
 
@@ -45,21 +45,23 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    let loginRequest = {
+      username: this.f.username.value,
+      password: this.f.password.value,
+    };
+
     this.loading = true;
-    this.accountService
-      .login(this.f.username.value, this.f.password.value)
-      .pipe(first())
-      .subscribe({
-        next: () => {
-          // get return url from sessionStorage or default to home page
-          let returnUrl = sessionStorage.getItem('returnUrl') || '/';
-          sessionStorage.removeItem('returnUrl');
-          this.router.navigateByUrl(returnUrl);
-        },
-        error: error => {
-          this.alertService.error(error?.error?.message || 'Login failed');
-          this.loading = false;
-        },
-      });
+    this.authService.login(loginRequest).subscribe({
+      next: () => {
+        // get return url from sessionStorage or default to home page
+        let returnUrl = this.authStorageService.loadRedirectUrl() || '/';
+        this.authStorageService.clearRedirectUrl();
+        this.router.navigateByUrl(returnUrl);
+      },
+      error: error => {
+        this.alertService.error(error?.error?.message || 'Login failed');
+        this.loading = false;
+      },
+    });
   }
 }

@@ -1,31 +1,19 @@
 ﻿import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { AuthService } from '../_helpers/auth.service';
+import { AuthStorageService } from '../_helpers/auth.storage.service';
 import { Post } from '../_models/post';
 import { User } from '../_models/user';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
-  private userSubject: BehaviorSubject<User | null>;
-  public user: Observable<User | null>;
-
   constructor(
-    private router: Router,
+    private authService: AuthService,
+    private authStorageService: AuthStorageService,
     private http: HttpClient
-  ) {
-    this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
-    this.user = this.userSubject.asObservable();
-  }
-
-  public get userValue() {
-    if (localStorage.getItem('user')) {
-      return this.userSubject.value;
-    }
-    return null;
-  }
+  ) {}
 
   callFakeRestApi() {
     return this.http.get('https://jsonplaceholder.typicode.com/posts/1/comments');
@@ -46,29 +34,6 @@ export class AccountService {
     });
   }
 
-  login(username: string, password: string) {
-    return this.http
-      .post<User>(`${environment.apiUrl}/users/authenticate`, {
-        username,
-        password,
-      })
-      .pipe(
-        map(user => {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('user', JSON.stringify(user));
-          this.userSubject.next(user);
-          return user;
-        })
-      );
-  }
-
-  logout() {
-    // remove user from local storage and set current user to null
-    localStorage.removeItem('user');
-    this.userSubject.next(null);
-    this.router.navigate(['/account/login']);
-  }
-
   register(user: User) {
     return this.http.post(`${environment.apiUrl}/users/register`, user);
   }
@@ -85,13 +50,13 @@ export class AccountService {
     return this.http.put(`${environment.apiUrl}/users/${id}`, params).pipe(
       map(x => {
         // update stored user if the logged in user updated their own record
-        if (id == this.userValue?.id) {
+        if (id == this.authService.currentUser()?.id) {
           // update local storage
-          const user = { ...this.userValue, ...params };
-          localStorage.setItem('user', JSON.stringify(user));
+          const user = { ...this.authService.currentUser, ...params };
+          this.authStorageService.saveUser(user);
 
           // publish updated user to subscribers
-          this.userSubject.next(user);
+          this.authService.getUserSubject().next(user);
         }
         return x;
       })
@@ -102,8 +67,8 @@ export class AccountService {
     return this.http.delete(`${environment.apiUrl}/users/${id}`).pipe(
       map(x => {
         // auto logout if the logged in user deleted their own record
-        if (id == this.userValue?.id) {
-          this.logout();
+        if (id == this.authService.currentUser()?.id) {
+          this.authService.logout();
         }
         return x;
       })

@@ -1,6 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { AccountService } from '../_services/account.service';
+import { AuthService } from './auth.service';
+import { AuthStorageService } from './auth.storage.service';
 
 /**
  * Angular route guard that checks if a user is authenticated before allowing access to protected routes.
@@ -26,15 +27,16 @@ import { AccountService } from '../_services/account.service';
  * ```
  */
 export const authGuard: CanActivateFn = (_, state) => {
-  const accountService = inject(AccountService);
+  const authService = inject(AuthService);
+  const authStorageService = inject(AuthStorageService);
   const router = inject(Router);
 
-  const user = accountService.userValue;
-  if (user) {
-    // authorised so return true
+  if (authService.isAuthenticated()) {
+    // authorised so return true allow to access route
     return true;
   }
-  sessionStorage.setItem('returnUrl', state.url);
+  // store the attempted URL for redirecting
+  authStorageService.saveRedirectUrl(state.url);
   // not logged in so redirect to login page with the return url
   router.navigate(['/account/login']);
   return false;
