@@ -72,7 +72,14 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   logout() {
-    this.authService.logout();
-    this.router.navigate(['/account/login']);
+    this.authService.logout().subscribe({
+      next: () => {
+        this.router.navigate(['/account/login']);
+      },
+      error: error => {
+        console.error('Logout error:', error);
+        this.router.navigate(['/account/login']);
+      },
+    });
   }
 }

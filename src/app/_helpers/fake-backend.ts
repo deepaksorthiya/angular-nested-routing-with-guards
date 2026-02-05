@@ -26,6 +26,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       switch (true) {
         case url.endsWith('/users/authenticate') && method === 'POST':
           return authenticate();
+        case url.endsWith('/users/logout') && method === 'POST':
+          return logout();
         case url.endsWith('/users/register') && method === 'POST':
           return register();
         case url.endsWith('/users') && method === 'GET':
@@ -52,6 +54,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         ...basicDetails(user),
         token: 'fake-jwt-token',
       });
+    }
+
+    function logout() {
+      return ok();
     }
 
     function register() {

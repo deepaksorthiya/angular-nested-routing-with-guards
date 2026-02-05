@@ -32,9 +32,13 @@ export class AuthService {
     return this.userSubject;
   }
 
-  logout(): void {
-    this.authStorageService.clearUser();
-    this.userSubject.next(null);
+  logout(): Observable<void> {
+    return this.http.post<void>(`${environment.apiUrl}/users/logout`, null).pipe(
+      tap(user => {
+        this.authStorageService.clearUser();
+        this.userSubject.next(null);
+      })
+    );
   }
 
   currentUser(): User | null {
