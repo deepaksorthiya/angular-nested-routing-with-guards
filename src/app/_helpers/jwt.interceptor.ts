@@ -15,6 +15,8 @@ export class JwtInterceptor implements HttpInterceptor {
     const isLoggedIn = user && user.token;
     const isApiUrl = request.url.startsWith(environment.apiUrl);
     if (isLoggedIn && isApiUrl) {
+      // do nothing as we are using cookie based authentication and session cookie sent by browser automatically with each request
+      // only use with fake-backend
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${user.token}`,

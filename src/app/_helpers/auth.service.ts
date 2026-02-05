@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { User } from '../_models/user';
 import { LoginRequest } from './auth.model';
@@ -20,25 +20,57 @@ export class AuthService {
   }
 
   login(payload: LoginRequest): Observable<User> {
-    return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, payload).pipe(
+    const params = new HttpParams()
+      .set('username', payload.username)
+      .set('password', payload.password);
+    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+    return this.http.post<User>(`${environment.apiUrl}/api/login`, {}, { headers, params }).pipe(
       tap(user => {
-        this.authStorageService.saveUser(user);
-        this.userSubject.next(user);
+        this.setAuthenticatedUser(user);
       })
     );
+  }
+
+  logout(): Observable<void> {
+    return this.http.post<void>(`${environment.apiUrl}/api/logout`, null).pipe(
+      tap(_ => {
+        this.resetAuthenticatedUser();
+      })
+    );
+  }
+
+  getUserDetails(): Observable<User | null> {
+    return this.http
+      .get<User>(`${environment.apiUrl}/api/user/me`)
+      .pipe(
+        tap({
+          next: user => {
+            this.setAuthenticatedUser(user);
+          },
+        })
+      )
+      .pipe(
+        catchError(error => {
+          // Handle the error here returning null
+          console.error('ERROR from CatchERROR :: ', error);
+          this.resetAuthenticatedUser();
+          return of(null);
+        })
+      );
+  }
+
+  setAuthenticatedUser(user: User): void {
+    this.authStorageService.saveUser(user);
+    this.userSubject.next(user);
+  }
+
+  resetAuthenticatedUser(): void {
+    this.authStorageService.clearUser();
+    this.userSubject.next(null);
   }
 
   getUserSubject(): BehaviorSubject<User | null> {
     return this.userSubject;
-  }
-
-  logout(): Observable<void> {
-    return this.http.post<void>(`${environment.apiUrl}/users/logout`, null).pipe(
-      tap(user => {
-        this.authStorageService.clearUser();
-        this.userSubject.next(null);
-      })
-    );
   }
 
   currentUser(): User | null {

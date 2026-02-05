@@ -15,18 +15,21 @@ let users: any[] = [
   { firstName: 'admin', lastName: 'admin', username: 'admin', password: 'password', id: '2' },
 ];
 
+const UNAUTHORIZED_MSG = 'Unauthorized';
+const UNAUTHORIZED_INVALID_CREDENTIALS = 'Username or password is incorrect';
+
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const { url, method, headers, body } = request;
+    const { url, method, headers, params, body } = request;
 
     return handleRoute();
 
     function handleRoute() {
       switch (true) {
-        case url.endsWith('/users/authenticate') && method === 'POST':
+        case url.endsWith('/api/login') && method === 'POST':
           return authenticate();
-        case url.endsWith('/users/logout') && method === 'POST':
+        case url.endsWith('/api/logout') && method === 'POST':
           return logout();
         case url.endsWith('/users/register') && method === 'POST':
           return register();
@@ -47,9 +50,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     // route functions
 
     function authenticate() {
-      const { username, password } = body;
+      const username = params.get('username');
+      const password = params.get('password');
       const user = users.find(x => x.username === username && x.password === password);
-      if (!user) return error('Username or password is incorrect');
+      if (!user) return unauthorized(UNAUTHORIZED_INVALID_CREDENTIALS);
       return ok({
         ...basicDetails(user),
         token: 'fake-jwt-token',
@@ -73,19 +77,19 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     function getUsers() {
-      if (!isLoggedIn()) return unauthorized();
+      if (!isLoggedIn()) return unauthorized(UNAUTHORIZED_MSG);
       return ok(users.map(x => basicDetails(x)));
     }
 
     function getUserById() {
-      if (!isLoggedIn()) return unauthorized();
+      if (!isLoggedIn()) return unauthorized(UNAUTHORIZED_MSG);
 
       const user = users.find(x => x.id === idFromUrl());
       return ok(basicDetails(user));
     }
 
     function updateUser() {
-      if (!isLoggedIn()) return unauthorized();
+      if (!isLoggedIn()) return unauthorized(UNAUTHORIZED_MSG);
 
       let params = body;
       let user = users.find(x => x.id === idFromUrl());
@@ -101,7 +105,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     function deleteUser() {
-      if (!isLoggedIn()) return unauthorized();
+      if (!isLoggedIn()) return unauthorized(UNAUTHORIZED_MSG);
 
       users = users.filter(x => x.id !== idFromUrl());
       return ok();
@@ -121,10 +125,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       ); // call materialize and dematerialize to ensure delay even if an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648);
     }
 
-    function unauthorized() {
+    function unauthorized(msg: string) {
       return throwError(() => ({
         status: 401,
-        error: { message: 'Unauthorized' },
+        error: { message: msg },
       })).pipe(materialize(), delay(500), dematerialize());
     }
 

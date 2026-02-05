@@ -1,6 +1,6 @@
 ﻿<div class="p-4">
   <div class="container">
-    <h1>Hi {{ user?.firstName }}!</h1>
+    <h1>Hi {{ user?.username || user?.name }}!</h1>
     <p>User JSON :: {{ user | json }}</p>
     <pre>Angular Core 20.3.16</pre>
     <pre>Angular CLI 20.3.15</pre>

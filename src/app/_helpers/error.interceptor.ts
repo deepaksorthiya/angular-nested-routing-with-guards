@@ -13,7 +13,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       catchError(err => {
         if ([401].includes(err.status) && this.authService.isAuthenticated()) {
           // auto logout if 401 response returned from api
-          this.authService.logout();
+          this.authService.resetAuthenticatedUser();
         }
         console.error('Error From Interceptor :: ', err);
         return throwError(() => err);
