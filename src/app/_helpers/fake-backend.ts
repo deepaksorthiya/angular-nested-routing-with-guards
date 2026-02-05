@@ -22,14 +22,15 @@ const UNAUTHORIZED_INVALID_CREDENTIALS = 'Username or password is incorrect';
 export class FakeBackendInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const { url, method, headers, params, body } = request;
+    const apiUrl = '/fake-api';
 
     return handleRoute();
 
     function handleRoute() {
       switch (true) {
-        case url.endsWith('/api/login') && method === 'POST':
+        case url.endsWith(apiUrl + '/api/login') && method === 'POST':
           return authenticate();
-        case url.endsWith('/api/logout') && method === 'POST':
+        case url.endsWith(apiUrl + '/api/logout') && method === 'POST':
           return logout();
         case url.endsWith('/users/register') && method === 'POST':
           return register();
