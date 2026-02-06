@@ -4,7 +4,6 @@ import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { AuthUser } from '../_helpers/auth.model';
 import { AuthService } from '../_helpers/auth.service';
-import { AuthStorageService } from '../_helpers/auth.storage.service';
 import { Post } from '../_models/post';
 import { User } from '../_models/user';
 
@@ -12,7 +11,6 @@ import { User } from '../_models/user';
 export class AccountService {
   constructor(
     private authService: AuthService,
-    private authStorageService: AuthStorageService,
     private http: HttpClient
   ) {}
 
@@ -66,7 +64,8 @@ export class AccountService {
     return this.http.delete(`${environment.apiUrl}/users/${id}`).pipe(
       map(x => {
         // auto logout if the logged in user deleted their own record
-        if (id == this.authService.currentUser()?.id) {
+        const authUser = this.authService.currentUser() as AuthUser;
+        if (id == authUser?.id) {
           this.authService.logout();
         }
         return x;

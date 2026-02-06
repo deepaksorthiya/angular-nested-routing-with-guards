@@ -8,6 +8,12 @@ import {
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+/**
+ * Interceptor that adds XSRF token to outgoing requests.
+ * The token is added to the `X-XSRF-TOKEN` header.
+ * this interceptor is reuired only if the backend is on a different origin.
+ * for local development with same origin backend, this interceptor is not required.
+ */
 @Injectable()
 export class CsrfInterceptor implements HttpInterceptor {
   constructor(private httpXsrfTokenExtractor: HttpXsrfTokenExtractor) {}
