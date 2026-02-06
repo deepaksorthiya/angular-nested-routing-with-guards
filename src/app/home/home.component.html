@@ -1,7 +1,7 @@
 ﻿<div class="p-4">
   <div class="container">
-    <h1>Hi {{ user?.username || user?.name }}!</h1>
-    <p>User JSON :: {{ user | json }}</p>
+    <h1>Hi {{ authUser?.username || authUser?.name }}!</h1>
+    <p>User JSON :: {{ authUser | json }}</p>
     <pre>Angular Core 20.3.16</pre>
     <pre>Angular CLI 20.3.15</pre>
     <button type="button" class="btn btn-primary" (click)="manageUsers()">Manage Users</button>

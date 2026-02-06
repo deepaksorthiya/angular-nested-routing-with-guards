@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
 import { AlertComponent } from './_components/alert.component';
 import { AuthService } from './_helpers/auth.service';
-import { User } from './_models/user';
+import { AuthUser } from './_helpers/auth.model';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +27,7 @@ import { User } from './_models/user';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
-  user$!: Observable<User | null>;
+  authUser$!: Observable<AuthUser | null>;
   private readonly document = inject(DOCUMENT);
   private readonly selector = 'globalLoader';
   isMenuCollapsed = true;
@@ -40,7 +40,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.user$ = this.authService.getUserObservable();
+    this.authUser$ = this.authService.getUserObservable();
     console.log('AppComponent ngOnInit() initialized.');
     console.log(environment);
   }

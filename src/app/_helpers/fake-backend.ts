@@ -32,15 +32,15 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           return authenticate();
         case url.endsWith(apiUrl + '/api/logout') && method === 'POST':
           return logout();
-        case url.endsWith('/users/register') && method === 'POST':
+        case url.endsWith(apiUrl + '/users/register') && method === 'POST':
           return register();
-        case url.endsWith('/users') && method === 'GET':
+        case url.endsWith(apiUrl + '/users') && method === 'GET':
           return getUsers();
-        case url.match(/\/users\/\d+$/) && method === 'GET':
+        case url.match(/\/users\/\d+$/) && url.includes(apiUrl) && method === 'GET':
           return getUserById();
-        case url.match(/\/users\/\d+$/) && method === 'PUT':
+        case url.match(/\/users\/\d+$/) && url.includes(apiUrl) && method === 'PUT':
           return updateUser();
-        case url.match(/\/users\/\d+$/) && method === 'DELETE':
+        case url.match(/\/users\/\d+$/) && url.includes(apiUrl) && method === 'DELETE':
           return deleteUser();
         default:
           // pass through any requests not handled above
@@ -101,7 +101,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       }
 
       // update and save user
-      Object.assign(user, params);
+      const newUser = Object.assign(user, params);
+      console.log('Updated User :: ', newUser);
       return ok();
     }
 
@@ -144,7 +145,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     function idFromUrl() {
       const urlParts = url.split('/');
-      return parseInt(urlParts[urlParts.length - 1]);
+      return urlParts[urlParts.length - 1];
     }
   }
 }

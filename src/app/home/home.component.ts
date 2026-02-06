@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../_helpers/auth.service';
-import { User } from '../_models/user';
+import { AuthUser } from '../_helpers/auth.model';
 
 @Component({
   templateUrl: 'home.component.html',
@@ -10,13 +10,13 @@ import { User } from '../_models/user';
   imports: [CommonModule],
 })
 export class HomeComponent {
-  user: User | null;
+  authUser: AuthUser | null;
 
   constructor(
     private authService: AuthService,
     private router: Router
   ) {
-    this.user = this.authService.currentUser();
+    this.authUser = this.authService.currentUser();
   }
 
   manageUsers() {

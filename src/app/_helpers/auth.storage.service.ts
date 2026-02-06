@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { User } from '../_models/user';
+import { AuthUser } from './auth.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthStorageService {
   private readonly KEY = 'user';
   private readonly ROUTE_URL = 'redirectUrl';
 
-  saveUser(user: User): void {
-    sessionStorage.setItem(this.KEY, JSON.stringify(user));
+  saveUser(authUser: AuthUser): void {
+    sessionStorage.setItem(this.KEY, JSON.stringify(authUser));
   }
 
-  loadUser(): User | null {
+  loadUser(): AuthUser | null {
     const raw = sessionStorage.getItem(this.KEY);
     return raw ? JSON.parse(raw) : null;
   }

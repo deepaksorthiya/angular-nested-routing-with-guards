@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AccountService } from '../_services/account.service';
@@ -42,13 +42,17 @@ export class AddEditComponent implements OnInit {
       // edit mode
       this.title = 'Edit User';
       this.loading = true;
-      this.accountService
-        .getById(this.id)
-        .pipe(first())
-        .subscribe(x => {
-          this.form.patchValue(x);
+      this.accountService.getById(this.id)
+      .subscribe({
+        next: user => {
+          this.form.patchValue(user);
           this.loading = false;
-        });
+        },
+        error: error => {
+          this.alertService.error(error);
+          this.loading = false;
+        },
+      });
     }
   }
 
@@ -70,7 +74,6 @@ export class AddEditComponent implements OnInit {
 
     this.submitting = true;
     this.saveUser()
-      .pipe(first())
       .subscribe({
         next: () => {
           this.alertService.success('User saved', {

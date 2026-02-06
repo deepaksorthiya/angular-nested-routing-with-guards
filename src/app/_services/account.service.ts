@@ -1,7 +1,8 @@
-﻿import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { AuthUser } from '../_helpers/auth.model';
 import { AuthService } from '../_helpers/auth.service';
 import { AuthStorageService } from '../_helpers/auth.storage.service';
 import { Post } from '../_models/post';
@@ -50,13 +51,11 @@ export class AccountService {
     return this.http.put(`${environment.apiUrl}/users/${id}`, params).pipe(
       map(x => {
         // update stored user if the logged in user updated their own record
-        if (id == this.authService.currentUser()?.id) {
-          // update local storage
-          const user = { ...this.authService.currentUser, ...params };
-          this.authStorageService.saveUser(user);
-
-          // publish updated user to subscribers
-          this.authService.getUserSubject().next(user);
+        const authUser = this.authService.currentUser() as AuthUser;
+        if (id == authUser?.id) {
+          const user = { ...authUser, ...params } as AuthUser;
+          // update auth user in local storage
+          this.authService.setAuthenticatedUser(user);
         }
         return x;
       })
