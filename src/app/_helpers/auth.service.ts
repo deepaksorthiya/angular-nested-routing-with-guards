@@ -23,13 +23,11 @@ export class AuthService {
       .set('username', payload.username)
       .set('password', payload.password);
     const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
-    return this.http
-      .post<AuthUser>(`${environment.apiUrl}/api/login`, {}, { headers, params })
-      .pipe(
-        tap(user => {
-          this.setAuthenticatedUser(user);
-        })
-      );
+    return this.http.post<AuthUser>(`${environment.apiUrl}/api/login`, params, { headers }).pipe(
+      tap(user => {
+        this.setAuthenticatedUser(user);
+      })
+    );
   }
 
   logout(): Observable<void> {
