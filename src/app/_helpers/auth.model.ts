@@ -1,6 +1,6 @@
-export interface AuthUser {
-  id: number;
-  username: string;
+import { User } from '../_models/user';
+
+export interface AuthUser extends User {
   token: string;
 }
 

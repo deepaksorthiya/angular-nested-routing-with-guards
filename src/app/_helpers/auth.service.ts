@@ -9,7 +9,7 @@ import { AuthStorageService } from './auth.storage.service';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly userSubject: BehaviorSubject<User | null>;
-  public readonly user: Observable<User | null>;
+  private readonly user: Observable<User | null>;
 
   constructor(
     private http: HttpClient,
@@ -71,6 +71,10 @@ export class AuthService {
 
   getUserSubject(): BehaviorSubject<User | null> {
     return this.userSubject;
+  }
+
+  getUserObservable(): Observable<User | null> {
+    return this.user;
   }
 
   currentUser(): User | null {

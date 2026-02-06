@@ -4,6 +4,7 @@ import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/rou
 import { NgbCollapseModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgProgressbar } from 'ngx-progressbar';
 import { NgProgressRouter } from 'ngx-progressbar/router';
+import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
 import { AlertComponent } from './_components/alert.component';
 import { AuthService } from './_helpers/auth.service';
@@ -26,8 +27,7 @@ import { User } from './_models/user';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
-  user?: User | null;
-
+  user$!: Observable<User | null>;
   private readonly document = inject(DOCUMENT);
   private readonly selector = 'globalLoader';
   isMenuCollapsed = true;
@@ -40,7 +40,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.authService.user.subscribe(x => (this.user = x));
+    this.user$ = this.authService.getUserObservable();
     console.log('AppComponent ngOnInit() initialized.');
     console.log(environment);
   }
