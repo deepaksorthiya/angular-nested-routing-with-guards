@@ -23,7 +23,7 @@ export class AuthService {
       .set('username', payload.username)
       .set('password', payload.password);
     const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
-    return this.http.post<AuthUser>(`${environment.apiUrl}/api/login`, params, { headers }).pipe(
+    return this.http.post<AuthUser>(`${environment.apiUrl}/api/login`, params, { headers, withCredentials: true }).pipe(
       tap(user => {
         this.setAuthenticatedUser(user);
       })
@@ -31,7 +31,7 @@ export class AuthService {
   }
 
   logout(): Observable<void> {
-    return this.http.post<void>(`${environment.apiUrl}/api/logout`, null).pipe(
+    return this.http.post<void>(`${environment.apiUrl}/api/logout`, null, { withCredentials: true } ).pipe(
       tap(_ => {
         this.resetAuthenticatedUser();
       })
@@ -40,7 +40,7 @@ export class AuthService {
 
   getUserDetails(): Observable<AuthUser | null> {
     return this.http
-      .get<AuthUser>(`${environment.apiUrl}/api/user/me`)
+      .get<AuthUser>(`${environment.apiUrl}/api/user/me`, { withCredentials: true })
       .pipe(
         tap({
           next: user => {
