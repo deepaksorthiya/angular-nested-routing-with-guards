@@ -52,14 +52,15 @@ export class LoginComponent implements OnInit {
 
     this.loading = true;
     this.authService.login(loginRequest).subscribe({
-      next: () => {
+      next: (user) => {
+        console.log('Login Successful:', user);
         // get return url from sessionStorage or default to home page
         let returnUrl = this.authStorageService.loadRedirectUrl() || '/';
         this.authStorageService.clearRedirectUrl();
         this.router.navigateByUrl(returnUrl);
       },
       error: error => {
-        this.alertService.error(error?.error?.message || 'Login failed');
+        this.alertService.error(error?.error?.detail || 'Login failed');
         this.loading = false;
       },
     });
