@@ -103,6 +103,20 @@ Open [http://localhost:4200/](http://localhost:4200/) in your browser.
 
 ---
 
+### Build and Run Docker Image
+
+Build Image
+
+```sh
+docker build --progress=plain --no-cache -t deepaksorthiya/angular-nested-routing-with-guards .
+```
+
+Run Image
+
+```sh
+docker run --name angular-nested-routing-with-guards -p 8080:8080 deepaksorthiya/angular-nested-routing-with-guards
+```
+
 ### Running On Kubernetes Minikube
 
 ```sh
