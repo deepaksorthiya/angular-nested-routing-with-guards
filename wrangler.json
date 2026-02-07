@@ -1,0 +1,8 @@
+{
+  "name": "angular-nested-routing-with-guards",
+  "compatibility_date": "2026-02-07",
+  "assets": {
+    "directory": "./dist/angular-nested-routing-with-guards/browser",
+    "not_found_handling": "single-page-application"
+  }
+}
