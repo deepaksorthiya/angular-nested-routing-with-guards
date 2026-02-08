@@ -22,23 +22,35 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ 20.19, 22.22, 24.13 ]
+    name: Angular Build Node-${{ matrix.node }}
     steps:
       - name: Checkout the source code
         uses: actions/checkout@v6
 
-      - name: Setup Node Js
+      - name: Setup Node Js ${{ matrix.node-version }}
         uses: actions/setup-node@v6
         with:
-          node-version: 24
+          node-version: ${{ matrix.node }}
           cache: "npm"
           cache-dependency-path: package-lock.json
 
+      - name: Print Node Npm Versions
+        run: |
+          node -v
+          npm -v
+
       - name: Install npm dependencies
         run: |
-          npm install
           npm ci
 
-      - name: Build
+      - name: Print All Versions
+        run: |
+          npx ng version
+
+      - name: Build Angular Application
         run: |
           npm run build
 
