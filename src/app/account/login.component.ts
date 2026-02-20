@@ -1,16 +1,17 @@
-﻿import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../_helpers/auth.service';
 import { AuthStorageService } from '../_helpers/auth.storage.service';
 import { AlertService } from '../_services/alert.service';
+import { LoginForm } from './login-form.model';
 
 @Component({
   templateUrl: 'login.component.html',
   standalone: false,
 })
 export class LoginComponent implements OnInit {
-  form: any;
+  form!: FormGroup<LoginForm>;
   loading = false;
   submitted = false;
 
@@ -24,8 +25,14 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      username: ['user', Validators.required],
-      password: ['password', Validators.required],
+      username: new FormControl<string>('user', {
+        nonNullable: true,
+        validators: [Validators.required, Validators.minLength(3), Validators.maxLength(10)],
+      }),
+      password: new FormControl<string>('password', {
+        nonNullable: true,
+        validators: Validators.required,
+      }),
     });
   }
 
@@ -52,7 +59,7 @@ export class LoginComponent implements OnInit {
 
     this.loading = true;
     this.authService.login(loginRequest).subscribe({
-      next: (user) => {
+      next: user => {
         console.log('Login Successful:', user);
         // get return url from sessionStorage or default to home page
         let returnUrl = this.authStorageService.loadRedirectUrl() || '/';
