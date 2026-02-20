@@ -12,8 +12,14 @@
         />
         @if (submitted && f.username.errors) {
           <div class="invalid-feedback">
-            @if (f.username.errors.required) {
+            @if (f.username.errors['required']) {
               <div>Username is required</div>
+            }
+            @if (f.username.errors['minlength']) {
+              <div>Username must be at least 3 characters</div>
+            }
+            @if (f.username.errors['maxlength']) {
+              <div>Username must be at most 10 characters</div>
             }
           </div>
         }
@@ -28,7 +34,7 @@
         />
         @if (submitted && f.password.errors) {
           <div class="invalid-feedback">
-            @if (f.password.errors.required) {
+            @if (f.password.errors['required']) {
               <div>Password is required</div>
             }
           </div>
@@ -41,7 +47,7 @@
           }
           Login
         </button>
-        <a routerLink="../register" class="btn btn-link">Register</a>
+        <a routerLink="../register" class="btn btn-primary m-1">Register</a>
       </div>
     </form>
   </div>

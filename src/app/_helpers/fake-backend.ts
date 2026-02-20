@@ -130,7 +130,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     function unauthorized(msg: string) {
       return throwError(() => ({
         status: 401,
-        error: { message: msg },
+        error: { message: msg, detail: msg },
       })).pipe(materialize(), delay(500), dematerialize());
     }
 

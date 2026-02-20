@@ -1,16 +1,17 @@
-﻿import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+﻿import { JsonPipe } from '@angular/common';
+import { Component, VERSION } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../_helpers/auth.service';
 import { AuthUser } from '../_helpers/auth.model';
+import { AuthService } from '../_helpers/auth.service';
 
 @Component({
   templateUrl: 'home.component.html',
   standalone: true,
-  imports: [CommonModule],
+  imports: [JsonPipe],
 })
 export class HomeComponent {
   authUser: AuthUser | null;
+  angularVersion = VERSION.full;
 
   constructor(
     private authService: AuthService,
