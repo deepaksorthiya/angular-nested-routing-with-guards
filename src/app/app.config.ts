@@ -9,7 +9,7 @@ import {
   ApplicationConfig,
   inject,
   provideAppInitializer,
-  provideZoneChangeDetection,
+  provideZonelessChangeDetection
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
@@ -27,7 +27,7 @@ import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideZonelessChangeDetection(),
     { provide: Window, useValue: window },
     provideRouter(routes),
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
