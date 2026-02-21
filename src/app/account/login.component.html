@@ -8,9 +8,9 @@
           type="text"
           formControlName="username"
           class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
+          [ngClass]="{ 'is-invalid': submitted() && f.username.errors }"
         />
-        @if (submitted && f.username.errors) {
+        @if (submitted() && f.username.errors) {
           <div class="invalid-feedback">
             @if (f.username.errors['required']) {
               <div>Username is required</div>
@@ -30,9 +30,9 @@
           type="password"
           formControlName="password"
           class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+          [ngClass]="{ 'is-invalid': submitted() && f.password.errors }"
         />
-        @if (submitted && f.password.errors) {
+        @if (submitted() && f.password.errors) {
           <div class="invalid-feedback">
             @if (f.password.errors['required']) {
               <div>Password is required</div>
@@ -41,8 +41,8 @@
         }
       </div>
       <div>
-        <button [disabled]="loading" class="btn btn-primary">
-          @if (loading) {
+        <button [disabled]="loading()" class="btn btn-primary">
+          @if (loading()) {
             <span class="spinner-border spinner-border-sm me-1"></span>
           }
           Login

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../_helpers/auth.service';
@@ -12,8 +12,9 @@ import { LoginForm } from './login-form.model';
 })
 export class LoginComponent implements OnInit {
   form!: FormGroup<LoginForm>;
-  loading = false;
-  submitted = false;
+  // replace plain booleans with signals for component state
+  loading: WritableSignal<boolean> = signal(false);
+  submitted: WritableSignal<boolean> = signal(false);
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,7 +43,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
+    // mark submitted via signal
+    this.submitted.set(true);
 
     // reset alerts on submit
     this.alertService.clear();
@@ -57,7 +59,8 @@ export class LoginComponent implements OnInit {
       password: this.f.password.value,
     };
 
-    this.loading = true;
+    // set loading flag via signal
+    this.loading.set(true);
     this.authService.login(loginRequest).subscribe({
       next: user => {
         console.log('Login Successful:', user);
@@ -68,7 +71,8 @@ export class LoginComponent implements OnInit {
       },
       error: error => {
         this.alertService.error(error?.error?.detail || 'Login failed');
-        this.loading = false;
+        // clear loading flag on error
+        this.loading.set(false);
       },
     });
   }
