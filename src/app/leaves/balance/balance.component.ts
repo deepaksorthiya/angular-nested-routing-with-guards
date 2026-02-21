@@ -1,12 +1,14 @@
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-balance',
-  standalone: false,
-
+  standalone: true,
   templateUrl: './balance.component.html',
   styleUrl: './balance.component.css',
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, NgbNavModule, AsyncPipe],
 })
 export class BalanceComponent {
   routingLinks = [

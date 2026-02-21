@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-page404leaves',
-  standalone: false,
-
+  standalone: true,
   templateUrl: './page404leaves.component.html',
   styleUrl: './page404leaves.component.css',
 })

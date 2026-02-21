@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-holiday',
-  standalone: false,
-
+  standalone: true,
   templateUrl: './holiday.component.html',
   styleUrl: './holiday.component.css',
 })

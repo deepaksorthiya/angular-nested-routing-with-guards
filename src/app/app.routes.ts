@@ -4,7 +4,7 @@ import { Page404Component } from './page404/page404.component';
 
 const accountRoutes = () => import('./account/account-routes').then(ar => ar.accountRoutes);
 const usersModule = () => import('./users/users.module').then(x => x.UsersModule);
-const leavesModule = () => import('./leaves/leaves.module').then(x => x.LeavesModule);
+const leavesRoutes = () => import('./leaves/leaves-routes').then(x => x.leavesRoutes);
 
 export const routes: Routes = [
   {
@@ -20,7 +20,7 @@ export const routes: Routes = [
   },
   {
     path: 'leaves',
-    loadChildren: leavesModule,
+    loadChildren: leavesRoutes,
     canActivate: [authGuard],
   },
   { path: 'account', loadChildren: accountRoutes },

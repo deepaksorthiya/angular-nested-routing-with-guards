@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-casual',
-  standalone: false,
-
+  standalone: true,
   templateUrl: './casual.component.html',
   styleUrl: './casual.component.css',
 })
