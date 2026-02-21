@@ -1,0 +1,1 @@
+import{Ib as s,Ua as n,pb as a,qb as o}from"./chunk-2YLQKHHI.js";var p=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=n({type:t,selectors:[["app-page404leaves"]],decls:2,vars:0,consts:[[1,"p-5","text-center"]],template:function(e,m){e&1&&(a(0,"h1",0),s(1,"404! Leaves Page not found!"),o())},encapsulation:2})};export{p as Page404leavesComponent};

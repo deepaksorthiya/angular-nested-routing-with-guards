@@ -1,0 +1,1 @@
+import{Ib as a,Ua as p,pb as n,qb as o}from"./chunk-2YLQKHHI.js";var s=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=p({type:t,selectors:[["app-apply"]],decls:2,vars:0,consts:[[1,"p-5","text-center"]],template:function(e,m){e&1&&(n(0,"h1",0),a(1,"Apply page works!"),o())},encapsulation:2})};export{s as ApplyComponent};

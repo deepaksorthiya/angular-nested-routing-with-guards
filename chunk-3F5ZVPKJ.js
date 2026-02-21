@@ -1,0 +1,1 @@
+import{Ib as c,Ua as n,pb as t,qb as o}from"./chunk-2YLQKHHI.js";var p=class a{static \u0275fac=function(e){return new(e||a)};static \u0275cmp=n({type:a,selectors:[["app-page404balance"]],decls:2,vars:0,consts:[[1,"p-5","text-center"]],template:function(e,s){e&1&&(t(0,"h1",0),c(1,"Balance 404 Not Found!"),o())},encapsulation:2})};export{p as Page404balanceComponent};

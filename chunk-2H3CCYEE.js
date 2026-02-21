@@ -1,0 +1,1 @@
+import{Ib as r,Ua as t,pb as o,qb as a}from"./chunk-2YLQKHHI.js";var p=class n{static \u0275fac=function(e){return new(e||n)};static \u0275cmp=t({type:n,selectors:[["app-earned"]],decls:2,vars:0,consts:[[1,"p-5","text-center"]],template:function(e,m){e&1&&(o(0,"h1",0),r(1,"Earned page works!"),a())},encapsulation:2})};export{p as EarnedComponent};

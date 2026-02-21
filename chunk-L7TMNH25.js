@@ -1,0 +1,1 @@
+import{Ib as i,Ua as o,pb as n,qb as a}from"./chunk-2YLQKHHI.js";var s=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=o({type:t,selectors:[["app-holiday"]],decls:2,vars:0,consts:[[1,"p-5","text-center"]],template:function(e,p){e&1&&(n(0,"h1",0),i(1,"Holiday Page Works!"),a())},encapsulation:2})};export{s as HolidayComponent};
