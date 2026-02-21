@@ -1,13 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './_helpers/auth.guard';
-import { AttendanceComponent } from './attendance/attendance.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { DestroyCheckComponent } from './destroy-check/destroy-check.component';
-import { HomeComponent } from './home/home.component';
 import { Page404Component } from './page404/page404.component';
-import { ProfileComponent } from './profile/profile.component';
-import { UsersTableComponent } from './users-table/users-table.component';
-import { WorkComponent } from './work/work.component';
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const usersModule = () => import('./users/users.module').then(x => x.UsersModule);
@@ -17,7 +10,7 @@ export const routes: Routes = [
   {
     path: '',
     title: 'Home',
-    component: HomeComponent,
+    loadComponent: () => import('./home/home.component').then(m => m.HomeComponent),
     canActivate: [authGuard],
   },
   {
@@ -34,37 +27,46 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     title: 'Dashboard',
-    component: DashboardComponent,
+    loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent),
     canActivate: [authGuard],
   },
   {
     path: 'profile',
     title: 'Profile',
-    component: ProfileComponent,
+    loadComponent: () => import('./profile/profile.component').then(m => m.ProfileComponent),
     canActivate: [authGuard],
   },
   {
     path: 'work',
     title: 'Work',
-    component: WorkComponent,
+    loadComponent: () => import('./work/work.component').then(m => m.WorkComponent),
     canActivate: [authGuard],
   },
   {
     path: 'attendance',
     title: 'Attendance',
-    component: AttendanceComponent,
+    loadComponent: () =>
+      import('./attendance/attendance.component').then(m => m.AttendanceComponent),
     canActivate: [authGuard],
   },
   {
     path: 'destroy-check',
     title: 'Destroy Check',
-    component: DestroyCheckComponent,
+    loadComponent: () =>
+      import('./destroy-check/destroy-check.component').then(m => m.DestroyCheckComponent),
     canActivate: [authGuard],
   },
   {
     path: 'users-table',
     title: 'Users Table',
-    component: UsersTableComponent,
+    loadComponent: () =>
+      import('./users-table/users-table.component').then(m => m.UsersTableComponent),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'ngb-alert',
+    title: 'Ngb Alert',
+    loadComponent: () => import('./ngbalert/ngbalert.component').then(m => m.NgbalertComponent),
     canActivate: [authGuard],
   },
   {
