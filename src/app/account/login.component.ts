@@ -1,6 +1,13 @@
+import { NgClass } from '@angular/common';
 import { Component, OnInit, signal, WritableSignal } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../_helpers/auth.service';
 import { AuthStorageService } from '../_helpers/auth.storage.service';
 import { AlertService } from '../_services/alert.service';
@@ -8,7 +15,8 @@ import { LoginForm } from './login-form.model';
 
 @Component({
   templateUrl: 'login.component.html',
-  standalone: false,
+  standalone: true,
+  imports: [ReactiveFormsModule, NgClass, RouterLink],
 })
 export class LoginComponent implements OnInit {
   form!: FormGroup<LoginForm>;

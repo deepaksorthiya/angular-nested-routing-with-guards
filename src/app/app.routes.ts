@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { authGuard } from './_helpers/auth.guard';
 import { Page404Component } from './page404/page404.component';
 
-const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
+const accountRoutes = () => import('./account/account-routes').then(ar => ar.accountRoutes);
 const usersModule = () => import('./users/users.module').then(x => x.UsersModule);
 const leavesModule = () => import('./leaves/leaves.module').then(x => x.LeavesModule);
 
@@ -23,7 +23,7 @@ export const routes: Routes = [
     loadChildren: leavesModule,
     canActivate: [authGuard],
   },
-  { path: 'account', loadChildren: accountModule },
+  { path: 'account', loadChildren: accountRoutes },
   {
     path: 'dashboard',
     title: 'Dashboard',
