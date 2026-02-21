@@ -23,19 +23,23 @@ export class AuthService {
       .set('username', payload.username)
       .set('password', payload.password);
     const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
-    return this.http.post<AuthUser>(`${environment.apiUrl}/api/login`, params, { headers, withCredentials: true }).pipe(
-      tap(user => {
-        this.setAuthenticatedUser(user);
-      })
-    );
+    return this.http
+      .post<AuthUser>(`${environment.apiUrl}/api/login`, params, { headers, withCredentials: true })
+      .pipe(
+        tap(user => {
+          this.setAuthenticatedUser(user);
+        })
+      );
   }
 
   logout(): Observable<void> {
-    return this.http.post<void>(`${environment.apiUrl}/api/logout`, null, { withCredentials: true } ).pipe(
-      tap(_ => {
-        this.resetAuthenticatedUser();
-      })
-    );
+    return this.http
+      .post<void>(`${environment.apiUrl}/api/logout`, null, { withCredentials: true })
+      .pipe(
+        tap(_ => {
+          this.resetAuthenticatedUser();
+        })
+      );
   }
 
   getUserDetails(): Observable<AuthUser | null> {
@@ -51,7 +55,7 @@ export class AuthService {
       .pipe(
         catchError(error => {
           // Handle the error here returning null
-          console.error('ERROR from CatchERROR :: ', error);
+          console.error('ERROR from Get UserDetails API :: ', error);
           this.resetAuthenticatedUser();
           return of(null);
         })
