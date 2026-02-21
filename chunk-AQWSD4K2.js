@@ -1,1 +1,0 @@
-import{Ib as p,Ua as o,pb as n,qb as r}from"./chunk-JOHU6ZP2.js";var m=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=o({type:t,selectors:[["app-work"]],decls:2,vars:0,consts:[[1,"p-5","text-center"]],template:function(e,a){e&1&&(n(0,"h1",0),p(1,"My work here!"),r())},encapsulation:2})};export{m as WorkComponent};
