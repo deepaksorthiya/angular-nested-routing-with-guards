@@ -23,4 +23,15 @@ export class HomeComponent {
   manageUsers() {
     this.router.navigateByUrl('/users');
   }
+
+  getUserDetails() {
+    this.authService.getUserDetails().subscribe({
+      next: user => {
+        this.authUser = { ...this.authUser, ...user } as AuthUser;
+      },
+      error: error => {
+        console.error('Error fetching user details:', error);
+      },
+    });
+  }
 }
