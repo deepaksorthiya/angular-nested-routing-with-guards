@@ -36,12 +36,13 @@ export class LoginComponent implements OnInit {
     this.form = this.formBuilder.group({
       username: new FormControl<string>('user', {
         nonNullable: true,
-        validators: [Validators.required, Validators.minLength(3), Validators.maxLength(10)],
+        validators: [Validators.required, Validators.minLength(3), Validators.maxLength(50)],
       }),
       password: new FormControl<string>('password', {
         nonNullable: true,
         validators: Validators.required,
       }),
+      rememberMe: new FormControl<boolean>(false, { nonNullable: true }),
     });
   }
 
@@ -65,6 +66,7 @@ export class LoginComponent implements OnInit {
     let loginRequest = {
       username: this.f.username.value,
       password: this.f.password.value,
+      rememberMe: this.f.rememberMe.value,
     };
 
     // set loading flag via signal

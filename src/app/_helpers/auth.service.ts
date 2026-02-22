@@ -21,7 +21,9 @@ export class AuthService {
   login(payload: LoginRequest): Observable<AuthUser> {
     const params = new HttpParams()
       .set('username', payload.username)
-      .set('password', payload.password);
+      .set('password', payload.password)
+      // spring boot default remember-me parameter name is 'remember-me'
+      .set('remember-me', payload.rememberMe);
     const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     return this.http
       .post<AuthUser>(`${environment.apiUrl}/api/login`, params, { headers, withCredentials: true })
