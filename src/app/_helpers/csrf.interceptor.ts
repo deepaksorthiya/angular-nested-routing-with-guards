@@ -39,7 +39,7 @@ export class CsrfInterceptor implements HttpInterceptor {
        * so for demo purpose we are not using withCredentials here, but in real application with backend on different origin with CORS enabled,
        *  withCredentials should be set to true to send the cookie with the request to backend
        */
-      // withCredentials: true,
+      withCredentials: true,
       headers: req.headers.set('X-XSRF-TOKEN', csrfToken || ''),
     });
 
