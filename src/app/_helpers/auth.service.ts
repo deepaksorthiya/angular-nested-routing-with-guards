@@ -64,6 +64,10 @@ export class AuthService {
       );
   }
 
+  performPostRequest() {
+    return this.http.post<any>(`${environment.apiUrl}/api/post`, null, { withCredentials: true });
+  }
+
   setAuthenticatedUser(authUser: AuthUser): void {
     this.authStorageService.saveUser(authUser);
     this.authUserSubject.next(authUser);

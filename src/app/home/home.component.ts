@@ -12,6 +12,7 @@ import { AuthService } from '../_helpers/auth.service';
 export class HomeComponent {
   authUser: AuthUser | null;
   angularVersion = VERSION.full;
+  postResponse: any;
 
   constructor(
     private authService: AuthService,
@@ -31,6 +32,20 @@ export class HomeComponent {
       },
       error: error => {
         console.error('Error fetching user details:', error);
+      },
+    });
+  }
+
+  performPostRequest() {
+    this.authService.performPostRequest().subscribe({
+      next: response => {
+        this.postResponse = response;
+        alert('POST request successful!');
+        console.log('POST request successful:', response);
+      },
+      error: error => {
+        alert('Error performing POST request. Check console for details.');
+        console.error('Error performing POST request:', error);
       },
     });
   }
