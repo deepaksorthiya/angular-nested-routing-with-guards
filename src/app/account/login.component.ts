@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { LoginRequest } from '../_helpers/auth.model';
 import { AuthService } from '../_helpers/auth.service';
 import { AuthStorageService } from '../_helpers/auth.storage.service';
 import { AlertService } from '../_services/alert.service';
@@ -19,7 +20,7 @@ import { LoginForm } from './login-form.model';
   imports: [ReactiveFormsModule, NgClass, RouterLink],
 })
 export class LoginComponent implements OnInit {
-  form!: FormGroup<LoginForm>;
+  loginForm!: FormGroup<LoginForm>;
   // replace plain booleans with signals for component state
   loading: WritableSignal<boolean> = signal(false);
   submitted: WritableSignal<boolean> = signal(false);
@@ -33,7 +34,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.form = this.formBuilder.group({
+    this.loginForm = this.formBuilder.group({
       username: new FormControl<string>('user', {
         nonNullable: true,
         validators: [Validators.required, Validators.minLength(3), Validators.maxLength(50)],
@@ -48,7 +49,7 @@ export class LoginComponent implements OnInit {
 
   // convenience getter for easy access to form fields
   get f() {
-    return this.form.controls;
+    return this.loginForm.controls;
   }
 
   onSubmit() {
@@ -59,11 +60,11 @@ export class LoginComponent implements OnInit {
     this.alertService.clear();
 
     // stop here if form is invalid
-    if (this.form.invalid) {
+    if (this.loginForm.invalid) {
       return;
     }
 
-    let loginRequest = {
+    let loginRequest: LoginRequest = {
       username: this.f.username.value,
       password: this.f.password.value,
       rememberMe: this.f.rememberMe.value,
