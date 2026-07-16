@@ -16,7 +16,7 @@
     "@angular/core": "20.3.26",
     "@angular/forms": "20.3.26",
     "@angular/platform-browser": "20.3.26",
-    "@angular/platform-browser-dynamic": "20.3.26",
+    "@angular/platform-browser-dynamic": "22.0.7",
     "@angular/router": "20.3.26",
     "@ng-bootstrap/ng-bootstrap": "19.0.1",
     "@popperjs/core": "2.11.8",
