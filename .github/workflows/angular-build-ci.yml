@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ 20.19, 22.22, 24.13 ]
+        node: [ 24.13 ]
     name: Angular Build Node-${{ matrix.node }}
     steps:
       - name: Checkout the source code
